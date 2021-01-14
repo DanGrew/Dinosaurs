@@ -1,4 +1,4 @@
-package uk.dangrew.dinosaurs.game.mechanism;
+package uk.dangrew.dinosaurs.game.actions;
 
 /**
  * Interface for providing actions the player can make per turn.

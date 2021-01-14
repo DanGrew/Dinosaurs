@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import uk.dangrew.dinosaurs.game.actions.GameAction;
+import uk.dangrew.dinosaurs.game.actions.MoveAction;
+import uk.dangrew.dinosaurs.game.actions.Movement;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;

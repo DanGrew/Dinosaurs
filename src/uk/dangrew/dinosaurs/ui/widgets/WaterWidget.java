@@ -8,10 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import uk.dangrew.dinosaurs.game.model.water.Water;
-import uk.dangrew.dinosaurs.game.storage.AssetWidget;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
+import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 
 /**
  * Ui representation of {@link Water}.

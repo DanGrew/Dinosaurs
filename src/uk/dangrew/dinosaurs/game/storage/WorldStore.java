@@ -3,8 +3,8 @@ package uk.dangrew.dinosaurs.game.storage;
 
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
-import uk.dangrew.dinosaurs.ui.world.WorldWidget;
+import uk.dangrew.dinosaurs.ui.view.WorldViewport;
+import uk.dangrew.dinosaurs.ui.widgets.WorldWidget;
 import uk.dangrew.kode.storage.structure.MappedObservableStoreManagerImpl;
 
 public class WorldStore extends MappedObservableStoreManagerImpl<String, World> implements AssetStore<World, WorldWidget> {

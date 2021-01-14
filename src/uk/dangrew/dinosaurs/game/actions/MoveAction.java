@@ -1,4 +1,4 @@
-package uk.dangrew.dinosaurs.game.mechanism;
+package uk.dangrew.dinosaurs.game.actions;
 
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.world.World;

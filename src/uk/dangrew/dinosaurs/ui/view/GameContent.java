@@ -1,7 +1,7 @@
-package uk.dangrew.dinosaurs.ui.world;
+package uk.dangrew.dinosaurs.ui.view;
 
 import javafx.scene.layout.Pane;
-import uk.dangrew.dinosaurs.game.storage.AssetWidget;
+import uk.dangrew.dinosaurs.ui.widgets.AssetWidget;
 
 /**
  * Container for the game's graphical content in terms of assets, that will contain everything related to the game and its world.

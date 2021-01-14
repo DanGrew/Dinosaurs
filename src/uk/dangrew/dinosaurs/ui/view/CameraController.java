@@ -1,6 +1,4 @@
-package uk.dangrew.dinosaurs.game.mechanism;
-
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
+package uk.dangrew.dinosaurs.ui.view;
 
 /**
  * Interface for controlling camera related behaviour.

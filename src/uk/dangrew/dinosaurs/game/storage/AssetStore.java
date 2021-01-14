@@ -5,7 +5,8 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
+import uk.dangrew.dinosaurs.ui.view.WorldViewport;
+import uk.dangrew.dinosaurs.ui.widgets.AssetWidget;
 import uk.dangrew.kode.concept.Concept;
 import uk.dangrew.kode.concept.ConceptStore;
 

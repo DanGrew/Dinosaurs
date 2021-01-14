@@ -1,5 +1,5 @@
 
-package uk.dangrew.dinosaurs.ui.world;
+package uk.dangrew.dinosaurs.ui.view;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

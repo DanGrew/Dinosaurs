@@ -7,7 +7,6 @@ import javafx.scene.shape.Circle;
 import uk.dangrew.dinosaurs.game.model.greenery.Tree;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.WorldWidget;
 
 public class TreeWidget extends Pane {
    

@@ -1,8 +1,8 @@
-package uk.dangrew.dinosaurs.game.mechanism;
-
-import uk.dangrew.dinosaurs.game.world.WorldLocation;
+package uk.dangrew.dinosaurs.game.actions;
 
 import java.util.function.Function;
+
+import uk.dangrew.dinosaurs.game.world.WorldLocation;
 
 /**
  * Types of movement permitted by the player.

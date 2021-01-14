@@ -1,7 +1,7 @@
 
 package uk.dangrew.dinosaurs.game.world;
 
-import uk.dangrew.dinosaurs.game.mechanism.Movement;
+import uk.dangrew.dinosaurs.game.actions.Movement;
 import uk.dangrew.kode.concept.Concept;
 import uk.dangrew.kode.concept.Properties;
 

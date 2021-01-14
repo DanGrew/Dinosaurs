@@ -1,5 +1,5 @@
 
-package uk.dangrew.dinosaurs.ui.world;
+package uk.dangrew.dinosaurs.ui.view;
 
 import java.util.ArrayList;
 import java.util.Collection;

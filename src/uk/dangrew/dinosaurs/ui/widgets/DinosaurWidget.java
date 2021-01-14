@@ -6,10 +6,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
-import uk.dangrew.dinosaurs.game.storage.AssetWidget;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
+import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 
 public class DinosaurWidget extends Pane implements AssetWidget {
    

@@ -1,13 +1,14 @@
 
-package uk.dangrew.dinosaurs.game.storage;
+package uk.dangrew.dinosaurs.ui.widgets;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import uk.dangrew.dinosaurs.game.storage.AssetStore;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.GameContent;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
+import uk.dangrew.dinosaurs.ui.view.GameContent;
+import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 import uk.dangrew.kode.concept.Concept;
 import uk.dangrew.kode.observable.FunctionListChangeListenerImpl;
 

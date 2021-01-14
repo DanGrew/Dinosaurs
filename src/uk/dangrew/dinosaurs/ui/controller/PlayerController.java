@@ -1,9 +1,9 @@
 package uk.dangrew.dinosaurs.ui.controller;
 
 import javafx.scene.layout.GridPane;
-import uk.dangrew.dinosaurs.game.mechanism.CameraController;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
 import uk.dangrew.dinosaurs.ui.controls.PanningControls;
+import uk.dangrew.dinosaurs.ui.view.CameraController;
 import uk.dangrew.kode.javafx.style.JavaFxStyle;
 
 /**

@@ -16,7 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import uk.dangrew.dinosaurs.game.mechanism.GameAction;
+import uk.dangrew.dinosaurs.game.actions.GameAction;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
 import uk.dangrew.kode.javafx.platform.JavaFxThreading;
 

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import uk.dangrew.dinosaurs.game.mechanism.GameAction;
+import uk.dangrew.dinosaurs.game.actions.GameAction;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
 import uk.dangrew.kode.javafx.style.JavaFxStyle;
 import uk.dangrew.kode.observable.FunctionListChangeListenerImpl;

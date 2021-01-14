@@ -3,8 +3,8 @@ package uk.dangrew.dinosaurs.game.storage;
 
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 import uk.dangrew.dinosaurs.ui.widgets.WaterWidget;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
 import uk.dangrew.kode.storage.structure.MappedObservableStoreManagerImpl;
 
 public class WaterStore extends MappedObservableStoreManagerImpl<String, Water> implements AssetStore<Water, WaterWidget> {

@@ -3,9 +3,8 @@
 package uk.dangrew.dinosaurs.ui.controls;
 
 import javafx.scene.input.KeyEvent;
-import uk.dangrew.dinosaurs.game.mechanism.CameraController;
 import uk.dangrew.dinosaurs.ui.main.Dinosaurs;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
+import uk.dangrew.dinosaurs.ui.view.CameraController;
 import uk.dangrew.kode.javafx.controls.DirectionControlType;
 import uk.dangrew.kode.javafx.keyboard.KeyBoardCapture;
 

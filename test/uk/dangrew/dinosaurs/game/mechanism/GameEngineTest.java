@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import uk.dangrew.dinosaurs.game.actions.GameAction;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
 
 @ExtendWith(MockitoExtension.class)

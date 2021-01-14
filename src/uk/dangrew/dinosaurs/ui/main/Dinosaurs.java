@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
 import uk.dangrew.dinosaurs.game.mechanism.GraphicalEngine;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.GameContent;
+import uk.dangrew.dinosaurs.ui.view.GameContent;
 import uk.dangrew.kode.javafx.keyboard.KeyBoardCapture;
 
 /**

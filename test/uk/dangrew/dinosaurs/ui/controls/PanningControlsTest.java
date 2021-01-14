@@ -18,8 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import uk.dangrew.dinosaurs.game.mechanism.CameraController;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
+import uk.dangrew.dinosaurs.ui.view.CameraController;
 import uk.dangrew.kode.javafx.keyboard.KeyBoardCapture;
 import uk.dangrew.kode.javafx.platform.JavaFxThreading;
 import uk.dangrew.kode.utility.event.TestKeyEvent;

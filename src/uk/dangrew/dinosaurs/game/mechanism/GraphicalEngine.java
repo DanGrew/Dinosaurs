@@ -3,14 +3,15 @@ package uk.dangrew.dinosaurs.game.mechanism;
 
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.model.water.Water;
-import uk.dangrew.dinosaurs.game.storage.WidgetManager;
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.view.CameraController;
+import uk.dangrew.dinosaurs.ui.view.GameContent;
+import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 import uk.dangrew.dinosaurs.ui.widgets.DinosaurWidget;
 import uk.dangrew.dinosaurs.ui.widgets.WaterWidget;
-import uk.dangrew.dinosaurs.ui.world.GameContent;
-import uk.dangrew.dinosaurs.ui.world.WorldViewport;
-import uk.dangrew.dinosaurs.ui.world.WorldWidget;
+import uk.dangrew.dinosaurs.ui.widgets.WidgetManager;
+import uk.dangrew.dinosaurs.ui.widgets.WorldWidget;
 
 /**
  * Core object for the ui.

@@ -1,4 +1,4 @@
-package uk.dangrew.dinosaurs.game.storage;
+package uk.dangrew.dinosaurs.ui.widgets;
 
 import javafx.scene.Node;
 
