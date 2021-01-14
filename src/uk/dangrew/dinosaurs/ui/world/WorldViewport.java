@@ -61,19 +61,19 @@ public class WorldViewport {
             topLeftProperty().get(), world.getHorizontalCellCount(), world.getVerticalCellCount());
    }
 
-   public void moveUp() {
+   public void panUp() {
       updateLocation(0, -1);
    }
 
-   public void moveDown() {
+   public void panDown() {
       updateLocation(0, 1);
    }
 
-   public void moveLeft() {
+   public void panLeft() {
       updateLocation(-1, 0);
    }
 
-   public void moveRight() {
+   public void panRight() {
       updateLocation(1, 0);
    }
    

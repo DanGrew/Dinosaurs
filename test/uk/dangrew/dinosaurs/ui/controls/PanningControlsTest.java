@@ -29,6 +29,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import uk.dangrew.dinosaurs.game.mechanism.CameraController;
 import uk.dangrew.dinosaurs.ui.world.WorldViewport;
 import uk.dangrew.kode.javafx.keyboard.KeyBoardCapture;
 import uk.dangrew.kode.javafx.platform.JavaFxThreading;
@@ -42,13 +43,13 @@ public class PanningControlsTest {
    
    @Mock private KeyBoardCapture keyBoardCapture;
    
-   @Mock private WorldViewport worldViewport;
+   @Mock private CameraController cameraController;
    private PanningControls systemUnderTest;
    
    @BeforeEach
    public void initialiseSystemUnderTest() {
       JavaFxThreading.startup();
-      systemUnderTest = new PanningControls(keyBoardCapture, worldViewport);
+      systemUnderTest = new PanningControls(keyBoardCapture, cameraController);
    }
    
    @Test
@@ -58,16 +59,16 @@ public class PanningControlsTest {
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.SHIFT));
       
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.RIGHT));
-      verify(worldViewport).moveRight();
+      verify(cameraController).panRight();
 
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.LEFT));
-      verify(worldViewport).moveLeft();
+      verify(cameraController).panLeft();
 
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.UP));
-      verify(worldViewport).moveUp();
+      verify(cameraController).panUp();
 
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.DOWN));
-      verify(worldViewport).moveDown();
+      verify(cameraController).panDown();
    }
    
    @Test
@@ -76,21 +77,21 @@ public class PanningControlsTest {
       verify(keyBoardCapture).capture(eq(KeyEvent.KEY_RELEASED), releasedCaptor.capture());
 
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.RIGHT));
-      verify(worldViewport, never()).moveRight();
+      verify(cameraController, never()).panRight();
 
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.LEFT));
-      verify(worldViewport, never()).moveLeft();
+      verify(cameraController, never()).panLeft();
 
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.UP));
-      verify(worldViewport, never()).moveUp();
+      verify(cameraController, never()).panUp();
 
       pressedCaptor.getValue().accept(new TestKeyEvent().build(KeyCode.DOWN));
-      verify(worldViewport, never()).moveDown();
+      verify(cameraController, never()).panDown();
 
       releasedCaptor.getValue().accept(new TestKeyEvent().build(KeyEvent.KEY_PRESSED,KeyCode.SHIFT));
 
       pressedCaptor.getValue().accept(new TestKeyEvent().build( KeyCode.RIGHT));
-      verify(worldViewport).moveRight();
+      verify(cameraController).panRight();
    }
    
 }

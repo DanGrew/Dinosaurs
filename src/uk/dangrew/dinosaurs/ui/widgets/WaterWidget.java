@@ -21,7 +21,7 @@ import javafx.scene.layout.Pane;
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.UiWorld;
+import uk.dangrew.dinosaurs.ui.world.WorldViewport;
 
 /**
  * Ui representation of {@link Water}.
@@ -30,24 +30,28 @@ public class WaterWidget extends Pane {
    
    private final DinosaursConfiguration dinosaursConfiguration;
    private final Water water;
+   private final WorldViewport worldViewport;
    
-   public WaterWidget(DinosaursConfiguration dinosaursConfiguration, Water water) {
+   public WaterWidget(DinosaursConfiguration dinosaursConfiguration, Water water, WorldViewport worldViewport) {
       this.dinosaursConfiguration = dinosaursConfiguration;
       this.water = water;
+      this.worldViewport = worldViewport;
+      
+      worldViewport.topLeftProperty().addListener((s, o, n) -> redraw());
    }
    
-   public void redraw(UiWorld uiWorld) {
+   public void redraw() {
       getChildren().clear();
       
-      Collection<WorldLocation> locationsInView = uiWorld.getViewport().getLocationsInView();
+      Collection<WorldLocation> locationsInView = worldViewport.getLocationsInView();
       water.getCoverage().stream()
             .filter(locationsInView::contains)
-            .map(location -> createWidgetAt(location, uiWorld))
+            .map(this::createWidgetAt)
             .forEach(getChildren()::add);
    }
    
-   private Node createWidgetAt(WorldLocation worldLocation, UiWorld uiWorld) {
-      WorldLocation worldLocationToDisplayAt = uiWorld.getViewport().translateToScreen(worldLocation);
+   private Node createWidgetAt(WorldLocation worldLocation) {
+      WorldLocation worldLocationToDisplayAt = worldViewport.translateToScreen(worldLocation);
       
       int worldCellDimension = dinosaursConfiguration.worldCellDimension().get();
       

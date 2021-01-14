@@ -35,16 +35,16 @@ public class WorldViewportTest {
    public void shouldUpdateTopLeftPosition() {
       assertThat(systemUnderTest.topLeftProperty().get(), equalTo(new WorldLocation(0, 0)));
       
-      systemUnderTest.moveRight();
+      systemUnderTest.panRight();
       assertThat(systemUnderTest.topLeftProperty().get(), equalTo(new WorldLocation(1, 0)));
 
-      systemUnderTest.moveLeft();
+      systemUnderTest.panLeft();
       assertThat(systemUnderTest.topLeftProperty().get(), equalTo(new WorldLocation(0, 0)));
 
-      systemUnderTest.moveDown();
+      systemUnderTest.panDown();
       assertThat(systemUnderTest.topLeftProperty().get(), equalTo(new WorldLocation(0, 1)));
 
-      systemUnderTest.moveUp();
+      systemUnderTest.panUp();
       assertThat(systemUnderTest.topLeftProperty().get(), equalTo(new WorldLocation(0, 0)));
    }
 

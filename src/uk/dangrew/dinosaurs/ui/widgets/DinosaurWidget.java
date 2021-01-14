@@ -19,19 +19,27 @@ import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
 import uk.dangrew.dinosaurs.ui.world.UiWorld;
+import uk.dangrew.dinosaurs.ui.world.WorldViewport;
 
 public class DinosaurWidget extends Pane {
    
    private final DinosaursConfiguration dinosaursConfiguration;
    private final Dinosaur dinosaur;
+   private final WorldViewport worldViewport;
    
-   public DinosaurWidget(DinosaursConfiguration dinosaursConfiguration, Dinosaur dinosaur) {
+   public DinosaurWidget(DinosaursConfiguration dinosaursConfiguration, Dinosaur dinosaur, WorldViewport worldViewport) {
       this.dinosaursConfiguration = dinosaursConfiguration;
       this.dinosaur = dinosaur;
+      this.worldViewport = worldViewport;
+
+      dinosaur.getWorldLocation().addListener((s, o, n) -> redraw());
+      worldViewport.topLeftProperty().addListener((s, o, n) -> redraw());
    }
    
-   public void redraw(UiWorld uiWorld){
-      WorldLocation worldLocation = uiWorld.getViewport().translateToScreen(dinosaur.getWorldLocation().get());
+   public void redraw(){
+      getChildren().clear();
+      
+      WorldLocation worldLocation = worldViewport.translateToScreen(dinosaur.getWorldLocation().get());
 
       Circle dinosaurWidget = createWidgetAt(worldLocation);
       Circle sightWidget = createWidgetAt(worldLocation);

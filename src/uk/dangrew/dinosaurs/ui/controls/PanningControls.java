@@ -14,6 +14,7 @@
 package uk.dangrew.dinosaurs.ui.controls;
 
 import javafx.scene.input.KeyEvent;
+import uk.dangrew.dinosaurs.game.mechanism.CameraController;
 import uk.dangrew.dinosaurs.ui.main.Dinosaurs;
 import uk.dangrew.dinosaurs.ui.world.WorldViewport;
 import uk.dangrew.kode.javafx.controls.DirectionControlType;
@@ -21,15 +22,15 @@ import uk.dangrew.kode.javafx.keyboard.KeyBoardCapture;
 
 public class PanningControls extends AbstractGameControls {
    
-   private final WorldViewport worldViewport;
+   private final CameraController cameraController;
 
-   public PanningControls(WorldViewport worldViewport) {
-      this(Dinosaurs.keyBoard(), worldViewport);
+   public PanningControls(CameraController cameraController) {
+      this(Dinosaurs.keyBoard(), cameraController);
    }
    
-   public PanningControls(KeyBoardCapture keyBoardCapture, WorldViewport worldViewport) {
+   public PanningControls(KeyBoardCapture keyBoardCapture, CameraController cameraController) {
       super(keyBoardCapture);
-      this.worldViewport = worldViewport;
+      this.cameraController = cameraController;
       
       setActionListener(this::pan);
    }
@@ -37,16 +38,16 @@ public class PanningControls extends AbstractGameControls {
    private void pan(DirectionControlType type){
       switch (type){
          case Up:
-            worldViewport.moveUp();
+            cameraController.panUp();
             break;
          case Down:
-            worldViewport.moveDown();
+            cameraController.panDown();
             break;
          case Left:
-            worldViewport.moveLeft();
+            cameraController.panLeft();
             break;
          case Right:
-            worldViewport.moveRight();
+            cameraController.panRight();
             break;
       }
    }
