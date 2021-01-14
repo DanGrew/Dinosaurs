@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import uk.dangrew.dinosaurs.game.model.water.Water;
+import uk.dangrew.dinosaurs.game.storage.AssetWidget;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
 import uk.dangrew.dinosaurs.ui.world.WorldViewport;
@@ -15,7 +16,7 @@ import uk.dangrew.dinosaurs.ui.world.WorldViewport;
 /**
  * Ui representation of {@link Water}.
  */
-public class WaterWidget extends Pane {
+public class WaterWidget extends Pane implements AssetWidget {
    
    private final DinosaursConfiguration dinosaursConfiguration;
    private final Water water;
@@ -26,9 +27,16 @@ public class WaterWidget extends Pane {
       this.water = water;
       this.worldViewport = worldViewport;
       
+      dinosaursConfiguration.currentWorld().addListener((s, o, n) -> redraw());
       worldViewport.topLeftProperty().addListener((s, o, n) -> redraw());
    }
-   
+
+   @Override
+   public Node getGraphicalComponent() {
+      return this;
+   }
+
+   @Override
    public void redraw() {
       getChildren().clear();
       
@@ -38,7 +46,12 @@ public class WaterWidget extends Pane {
             .map(this::createWidgetAt)
             .forEach(getChildren()::add);
    }
-   
+
+   @Override
+   public void destroy() {
+      getChildren().clear();
+   }
+
    private Node createWidgetAt(WorldLocation worldLocation) {
       WorldLocation worldLocationToDisplayAt = worldViewport.translateToScreen(worldLocation);
       

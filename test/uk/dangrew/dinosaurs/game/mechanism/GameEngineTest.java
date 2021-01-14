@@ -1,20 +1,21 @@
 package uk.dangrew.dinosaurs.game.mechanism;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Collection;
-import java.util.List;
-
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
 
 @ExtendWith(MockitoExtension.class)
 public class GameEngineTest {
@@ -27,7 +28,7 @@ public class GameEngineTest {
    
    @BeforeEach
    public void initialiseSystemUnderTest() {
-      systemUnderTest = new GameEngine(assetManager, actionProcessor);
+      systemUnderTest = new GameEngine(new DinosaursConfiguration(), assetManager, actionProcessor);
       
       gameActions = asList(mock(GameAction.class), mock(GameAction.class));
       when(actionProcessor.calculateAvailableActions()).thenReturn(gameActions);

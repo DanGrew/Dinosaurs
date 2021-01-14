@@ -1,15 +1,15 @@
 
 package uk.dangrew.dinosaurs.game.model.dinosaur;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
-import uk.dangrew.dinosaurs.game.world.World;
-import uk.dangrew.dinosaurs.game.world.WorldLocation;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import uk.dangrew.dinosaurs.game.world.World;
+import uk.dangrew.dinosaurs.game.world.WorldLocation;
 
 public class DinosaurTest {
    
@@ -18,7 +18,7 @@ public class DinosaurTest {
    
    @BeforeEach
    public void initialiseSystemUnderTest() {
-      world = new World();
+      world = new World("World");
       systemUnderTest = new Dinosaur("Steggy");
    }
    

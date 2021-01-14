@@ -1,11 +1,11 @@
 package uk.dangrew.dinosaurs.game.mechanism;
 
+import java.util.Collection;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
 import uk.dangrew.kode.observable.PrivatelyModifiableObservableListImpl;
-
-import java.util.Collection;
 
 /**
  * Core object in the game, responsible for the game mechanics and assets. Does not care for the ui.
@@ -18,15 +18,18 @@ public class GameEngine {
    private final ObservableList<GameAction> availableActions;
    private final ObservableList<GameAction> privatelyManagedAvailableActions;
    
-   public GameEngine() {
-      this(new AssetManager());
+   private final DinosaursConfiguration dinosaursConfiguration;
+   
+   public GameEngine(DinosaursConfiguration dinosaursConfiguration) {
+      this(dinosaursConfiguration, new AssetManager());
    }
    
-   private GameEngine(AssetManager assetManager){
-      this(assetManager, new ActionProcessor(assetManager.getWorld(), assetManager.getDinosaur()));
+   private GameEngine(DinosaursConfiguration dinosaursConfiguration, AssetManager assetManager){
+      this(dinosaursConfiguration, assetManager, new ActionProcessor(dinosaursConfiguration));
    }
    
-   GameEngine(AssetManager assetManager, ActionProcessor actionProcessor){
+   GameEngine(DinosaursConfiguration dinosaursConfiguration, AssetManager assetManager, ActionProcessor actionProcessor){
+      this.dinosaursConfiguration = dinosaursConfiguration;
       this.assetManager = assetManager;
       this.actionProcessor = actionProcessor;
 
@@ -56,6 +59,9 @@ public class GameEngine {
    }
 
    public void begin() {
+      assetManager.buildWorld1();
+      dinosaursConfiguration.currentWorld().set(assetManager.getWorld());
+      dinosaursConfiguration.currentPlayer().set(assetManager.getPlayer());
       updatePlayerActions();
    }
    

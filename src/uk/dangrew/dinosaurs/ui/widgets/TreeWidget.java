@@ -7,7 +7,7 @@ import javafx.scene.shape.Circle;
 import uk.dangrew.dinosaurs.game.model.greenery.Tree;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
-import uk.dangrew.dinosaurs.ui.world.UiWorld;
+import uk.dangrew.dinosaurs.ui.world.WorldWidget;
 
 public class TreeWidget extends Pane {
    
@@ -19,8 +19,8 @@ public class TreeWidget extends Pane {
       this.tree = tree;
    }
    
-   public void redraw(UiWorld uiWorld){
-      WorldLocation worldLocation = uiWorld.getViewport().translateToScreen(tree.getWorldLocation());
+   public void redraw(WorldWidget worldWidget){
+      WorldLocation worldLocation = worldWidget.getViewport().translateToScreen(tree.getWorldLocation());
 
       Circle treeWidget = createWidgetAt(worldLocation);
       treeWidget.setFill(Color.GREEN);

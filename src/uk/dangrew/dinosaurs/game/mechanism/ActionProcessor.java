@@ -6,25 +6,31 @@ import java.util.Set;
 
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.world.World;
+import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
 
 /**
  * Calculates all possible actions available to the player per turn.
  */
 public class ActionProcessor {
    
-   private final World world;
-   private final Dinosaur dinosaur;
+   private final DinosaursConfiguration dinosaursConfiguration;
    
-   public ActionProcessor(World world, Dinosaur dinosaur){
-      this.world = world;
-      this.dinosaur = dinosaur;
+   public ActionProcessor(DinosaursConfiguration dinosaursConfiguration){
+      this.dinosaursConfiguration = dinosaursConfiguration;
    }
    
    public Collection<GameAction> calculateAvailableActions(){
       Set<GameAction> possibleActions = new LinkedHashSet<>();
+
+      World currentWorld = dinosaursConfiguration.currentWorld().get();
+      Dinosaur currentPlayer = dinosaursConfiguration.currentPlayer().get();
+      
+      if ( currentPlayer == null || currentPlayer == null ) {
+         throw new IllegalStateException("Must have world and player configured.");
+      }
       
       for(Movement movement : Movement.values()) {
-         possibleActions.add(new MoveAction(world, dinosaur, movement));
+         possibleActions.add(new MoveAction(currentWorld, currentPlayer, movement));
       }
       
       return possibleActions;

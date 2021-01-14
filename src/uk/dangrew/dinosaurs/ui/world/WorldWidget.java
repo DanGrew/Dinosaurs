@@ -2,11 +2,10 @@
 
 package uk.dangrew.dinosaurs.ui.world;
 
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
-import uk.dangrew.dinosaurs.game.model.greenery.Tree;
-import uk.dangrew.dinosaurs.game.model.water.Water;
+import uk.dangrew.dinosaurs.game.storage.AssetWidget;
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.resources.DinosaurImages;
@@ -15,20 +14,24 @@ import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
 /**
  * Ui representation of the {@link World}.
  */
-public class UiWorld extends Pane {
-   
+public class WorldWidget extends Pane implements AssetWidget {
+
    private final DinosaursConfiguration dinosaursConfiguration;
    
    private final World world;
    private final WorldViewport worldViewport;
    
-   public UiWorld(DinosaursConfiguration dinosaursConfiguration, World world) {
+   public WorldWidget(DinosaursConfiguration dinosaursConfiguration, World world, WorldViewport worldViewport) {
       this.dinosaursConfiguration = dinosaursConfiguration;
       this.world = world;
-      this.worldViewport = new WorldViewport(world);
-      
-      
-      redraw();
+      this.worldViewport = worldViewport;
+
+      dinosaursConfiguration.currentWorld().addListener((s, o, n) -> redraw());
+   }
+
+   @Override
+   public Node getGraphicalComponent() {
+      return this;
    }
 
    public WorldViewport getViewport() {
@@ -39,6 +42,7 @@ public class UiWorld extends Pane {
       return world;
    }
 
+   @Override
    public void redraw() {
       getChildren().clear();
       
@@ -56,5 +60,9 @@ public class UiWorld extends Pane {
          getChildren().add(imageView);
       }
    }
-   
+
+   @Override
+   public void destroy() {
+      getChildren().clear();
+   }
 }

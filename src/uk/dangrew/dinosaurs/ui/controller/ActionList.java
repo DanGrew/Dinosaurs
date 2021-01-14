@@ -11,7 +11,7 @@ import uk.dangrew.kode.javafx.style.JavaFxStyle;
 import uk.dangrew.kode.observable.FunctionListChangeListenerImpl;
 
 /**
- * Provides a graphical display of all axctions available to the player.
+ * Provides a graphical display of all actions available to the player.
  */
 public class ActionList extends GridPane {
    

@@ -1,23 +1,22 @@
 
 package uk.dangrew.dinosaurs.ui.world;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import uk.dangrew.dinosaurs.game.world.World;
-import uk.dangrew.dinosaurs.game.world.WorldLocation;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import uk.dangrew.dinosaurs.game.world.WorldLocation;
+import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+
 public class WorldViewportTest {
    
-   private World world;
    private WorldViewport systemUnderTest;
    
    @BeforeEach
    public void initialiseSystemUnderTest() {
-      world = new World();
-      systemUnderTest = new WorldViewport(world);
+      systemUnderTest = new WorldViewport(new DinosaursConfiguration());
    }
    
    @Test
