@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
+import uk.dangrew.dinosaurs.game.collision.WaterCollisionDetector;
+import uk.dangrew.dinosaurs.game.storage.Asset;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.kode.concept.Concept;
 import uk.dangrew.kode.concept.Properties;
@@ -12,10 +15,11 @@ import uk.dangrew.kode.concept.Properties;
 /**
  * An individual body of water spanning multiple world locations.
  */
-public class Water implements Concept {
+public class Water implements Asset {
    
    private final Properties properties;
    private final Map<WorldLocation, WaterLocationProperties> locationProperties;
+   private final WaterCollisionDetector waterCollisionDetector;
    
    public Water(String name) {
       this(name, name);
@@ -28,6 +32,7 @@ public class Water implements Concept {
    Water(Properties properties){
       this.properties = properties;
       this.locationProperties = new LinkedHashMap<>();
+      this.waterCollisionDetector = new WaterCollisionDetector(this);
    }
 
    @Override
@@ -38,6 +43,11 @@ public class Water implements Concept {
    @Override
    public Concept duplicate() {
       throw new UnsupportedOperationException();
+   }
+
+   @Override
+   public CollisionDetector getCollisionDetector() {
+      return waterCollisionDetector;
    }
 
    public Collection<WorldLocation> getCoverage() {

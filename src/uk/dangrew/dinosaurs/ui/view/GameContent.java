@@ -8,7 +8,7 @@ import uk.dangrew.dinosaurs.ui.widgets.AssetWidget;
  */
 public class GameContent extends Pane {
    
-   private static final int WINDOW_DIMENSION = 600;
+   private static final int WINDOW_DIMENSION = 800;
    
    public GameContent(){
       setPrefSize(WINDOW_DIMENSION, WINDOW_DIMENSION);

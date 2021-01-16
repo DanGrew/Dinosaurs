@@ -4,9 +4,10 @@ package uk.dangrew.dinosaurs.game.mechanism;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.game.world.World;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.dinosaurs.ui.view.CameraController;
 import uk.dangrew.dinosaurs.ui.view.GameContent;
+import uk.dangrew.dinosaurs.ui.view.PlayerFocusController;
 import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 import uk.dangrew.dinosaurs.ui.widgets.DinosaurWidget;
 import uk.dangrew.dinosaurs.ui.widgets.WaterWidget;
@@ -18,7 +19,7 @@ import uk.dangrew.dinosaurs.ui.widgets.WorldWidget;
  */
 public class GraphicalEngine {
    
-   private final DinosaursConfiguration dinosaursConfiguration;
+   private final GameState gameState;
    private final AssetManager assetManager;
    
    private final WorldViewport worldViewport;
@@ -30,17 +31,18 @@ public class GraphicalEngine {
    
    private final GameContent gameContent;
    
-   public GraphicalEngine(GameContent gameContent, DinosaursConfiguration dinosaursConfiguration, AssetManager assetManager) {
+   public GraphicalEngine(GameContent gameContent, GameState gameState, AssetManager assetManager) {
       this.gameContent = gameContent;
-      this.dinosaursConfiguration = dinosaursConfiguration;
+      this.gameState = gameState;
       this.assetManager = assetManager;
       
-      this.worldViewport = new WorldViewport(dinosaursConfiguration);
+      this.worldViewport = new WorldViewport(gameState);
+      new PlayerFocusController(gameState, worldViewport);
       this.cameraController = new CameraController(worldViewport);
       
-      this.worldWidgets = new WidgetManager<>(gameContent, dinosaursConfiguration, worldViewport, assetManager.getWorldStore());
-      this.dinosaurWidgets = new WidgetManager<>(gameContent, dinosaursConfiguration, worldViewport, assetManager.getDinosaurStore());
-      this.waterWidgets = new WidgetManager<>(gameContent, dinosaursConfiguration, worldViewport, assetManager.getWaterStore());
+      this.worldWidgets = new WidgetManager<>(gameContent, gameState, worldViewport, assetManager.getWorldStore());
+      this.dinosaurWidgets = new WidgetManager<>(gameContent, gameState, worldViewport, assetManager.getDinosaurStore());
+      this.waterWidgets = new WidgetManager<>(gameContent, gameState, worldViewport, assetManager.getWaterStore());
    }
    
    public CameraController getCameraController() {

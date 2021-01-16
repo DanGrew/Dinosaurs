@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 
 public class WorldViewportTest {
    
@@ -16,7 +16,7 @@ public class WorldViewportTest {
    
    @BeforeEach
    public void initialiseSystemUnderTest() {
-      systemUnderTest = new WorldViewport(new DinosaursConfiguration());
+      systemUnderTest = new WorldViewport(new GameState());
    }
    
    @Test
@@ -34,6 +34,11 @@ public class WorldViewportTest {
 
       systemUnderTest.panUp();
       assertThat(systemUnderTest.topLeftProperty().get(), equalTo(new WorldLocation(0, 0)));
+   }
+   
+   @Test
+   public void shouldResetLocationWhenWorldChanges() {
+   
    }
 
 }

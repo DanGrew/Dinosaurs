@@ -1,14 +1,15 @@
 HIGH
-Commit Dinosaurs
-Get tests running
+World in location constructor + testing
+Water creation in blocks, squares, or circles
+
 
 MEDIUM
 Fix publishing in gradle scripts
 Get authentication working for GitHUb (email)
 Javafx modules on run configuration
-Tidy jenkins jobs
 
 LOW
+Get tests running
 Commit uncommitted music-tagger changes
 Nuts working on windows - add script for running
 

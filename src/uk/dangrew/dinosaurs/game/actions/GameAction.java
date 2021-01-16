@@ -5,6 +5,8 @@ package uk.dangrew.dinosaurs.game.actions;
  */
 public interface GameAction {
    
+   public boolean isAvailable();
+   
    public String describe();
    
    public void performAction();

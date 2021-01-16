@@ -5,7 +5,7 @@ import java.util.Collection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import uk.dangrew.dinosaurs.game.actions.GameAction;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.kode.observable.PrivatelyModifiableObservableListImpl;
 
 /**
@@ -19,18 +19,18 @@ public class GameEngine {
    private final ObservableList<GameAction> availableActions;
    private final ObservableList<GameAction> privatelyManagedAvailableActions;
    
-   private final DinosaursConfiguration dinosaursConfiguration;
+   private final GameState gameState;
    
-   public GameEngine(DinosaursConfiguration dinosaursConfiguration) {
-      this(dinosaursConfiguration, new AssetManager());
+   public GameEngine(GameState gameState) {
+      this(gameState, new AssetManager());
    }
    
-   private GameEngine(DinosaursConfiguration dinosaursConfiguration, AssetManager assetManager){
-      this(dinosaursConfiguration, assetManager, new ActionProcessor(dinosaursConfiguration));
+   private GameEngine(GameState gameState, AssetManager assetManager){
+      this(gameState, assetManager, new ActionProcessor(gameState, assetManager));
    }
    
-   GameEngine(DinosaursConfiguration dinosaursConfiguration, AssetManager assetManager, ActionProcessor actionProcessor){
-      this.dinosaursConfiguration = dinosaursConfiguration;
+   GameEngine(GameState gameState, AssetManager assetManager, ActionProcessor actionProcessor){
+      this.gameState = gameState;
       this.assetManager = assetManager;
       this.actionProcessor = actionProcessor;
 
@@ -61,8 +61,8 @@ public class GameEngine {
 
    public void begin() {
       assetManager.buildWorld1();
-      dinosaursConfiguration.currentWorld().set(assetManager.getWorld());
-      dinosaursConfiguration.currentPlayer().set(assetManager.getPlayer());
+      gameState.currentWorld().set(assetManager.getWorld());
+      gameState.currentPlayer().set(assetManager.getPlayer());
       updatePlayerActions();
    }
    

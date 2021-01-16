@@ -3,6 +3,8 @@ package uk.dangrew.dinosaurs.game.model.water;
 
 import java.util.Objects;
 
+import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
+
 /**
  * Behaviour associated with the depth of water.
  */
@@ -16,6 +18,10 @@ public class WaterDepth {
 
    public int getDepth() {
       return depth;
+   }
+
+   public boolean dinosaurCanSurvive(Dinosaur dinosaur) {
+      return dinosaur.getHeight() > depth;
    }
 
    @Override

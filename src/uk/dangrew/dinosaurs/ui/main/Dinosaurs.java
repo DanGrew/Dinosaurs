@@ -16,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
 import uk.dangrew.dinosaurs.game.mechanism.GraphicalEngine;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.dinosaurs.ui.view.GameContent;
 import uk.dangrew.kode.javafx.keyboard.KeyBoardCapture;
 
@@ -49,10 +49,10 @@ public class Dinosaurs extends Application {
       KEY_BOARD_CAPTURE = new KeyBoardCapture(scene);
       stage.setScene(scene);
 
-      DinosaursConfiguration dinosaursConfiguration = new DinosaursConfiguration();
-      GameEngine gameEngine = new GameEngine(dinosaursConfiguration);
+      GameState gameState = new GameState();
+      GameEngine gameEngine = new GameEngine(gameState);
       GameContent gameContent = new GameContent();
-      GraphicalEngine graphicalEngine = new GraphicalEngine(gameContent, dinosaursConfiguration, gameEngine.getAssetManager());
+      GraphicalEngine graphicalEngine = new GraphicalEngine(gameContent, gameState, gameEngine.getAssetManager());
       UiTopLevelPane topLevelPane = new UiTopLevelPane(gameEngine, graphicalEngine.getCameraController(), gameContent);
 
       wrapper.setCenter(topLevelPane);

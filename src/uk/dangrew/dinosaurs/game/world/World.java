@@ -1,19 +1,25 @@
 
 package uk.dangrew.dinosaurs.game.world;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import uk.dangrew.dinosaurs.game.actions.Movement;
+import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
+import uk.dangrew.dinosaurs.game.collision.NoCollisions;
+import uk.dangrew.dinosaurs.game.storage.Asset;
 import uk.dangrew.kode.concept.Concept;
 import uk.dangrew.kode.concept.Properties;
 
 /**
  * Definition of the world, and the associated grid behind it.
  */
-public class World implements Concept {
+public class World implements Asset {
    
-   private static final int WORLD_DIMENSION = 100;
+   private final IntegerProperty width;
+   private final IntegerProperty height;
    
    private final Properties properties;
-   private final WorldLocation[][] worldLocations;
+   private final CollisionDetector collisionDetector;
    
    public World(String name) {
       this(name, name);
@@ -24,13 +30,10 @@ public class World implements Concept {
    }
    
    World(Properties properties) {
+      this.width = new SimpleIntegerProperty();
+      this.height = new SimpleIntegerProperty();
       this.properties = properties;
-      this.worldLocations = new WorldLocation[WORLD_DIMENSION][WORLD_DIMENSION];
-      for (int horizontal = 0; horizontal < WORLD_DIMENSION; horizontal++) {
-         for (int vertical = 0; vertical < WORLD_DIMENSION; vertical++) {
-            worldLocations[horizontal][vertical] = new WorldLocation(horizontal, vertical);
-         }
-      }
+      this.collisionDetector = new NoCollisions();
    }
 
    @Override
@@ -43,18 +46,28 @@ public class World implements Concept {
       throw new UnsupportedOperationException();
    }
 
+   public void setDimension(int width, int height){
+      this.width.setValue(width);
+      this.height.setValue(height);
+   }
+
+   public int getHorizontalCellCount() {
+      return width.get();
+   }
+
+   public int getVerticalCellCount() {
+      return height.get();
+   }
+
+   @Override
+   public CollisionDetector getCollisionDetector() {
+      return collisionDetector;
+   }
+   
    public WorldLocation locationForMovement(WorldLocation worldLocation, Movement movement) {
       WorldLocation rawMove = movement.rawMove(worldLocation);
       return new WorldLocation(
-            rawMove.getHorizontal() % getHorizontalCellCount(),
-            rawMove.getVertical() % getVerticalCellCount());
-   }
-   
-   public int getHorizontalCellCount() {
-      return WORLD_DIMENSION;
-   }
-   
-   public int getVerticalCellCount() {
-      return WORLD_DIMENSION;
+            Math.floorMod(rawMove.getHorizontal(), getHorizontalCellCount()),
+            Math.floorMod(rawMove.getVertical(), getVerticalCellCount()));
    }
 }

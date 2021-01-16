@@ -14,7 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.world.World;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.dinosaurs.ui.view.GameContent;
 import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 import uk.dangrew.dinosaurs.ui.widgets.DinosaurWidget;
@@ -24,7 +24,7 @@ import uk.dangrew.dinosaurs.ui.widgets.WidgetManager;
 public class WidgetManagerTest {
    
    @Mock private GameContent gameContent;
-   private DinosaursConfiguration dinosaursConfiguration;
+   private GameState gameState;
    @Mock private WorldViewport worldViewport;
    @Mock private AssetStore<Dinosaur, DinosaurWidget> dinosaurStore;
    private ObservableList<Dinosaur> dinosaurs;
@@ -35,12 +35,12 @@ public class WidgetManagerTest {
    
    @BeforeEach
    public void initialiseSystemUnderTest() {
-      dinosaursConfiguration = new DinosaursConfiguration();
+      gameState = new GameState();
       dinosaurs = FXCollections.observableArrayList();
       when(dinosaurStore.objectList()).thenReturn(dinosaurs);
-      when(dinosaurStore.createWidget(dinosaursConfiguration, worldViewport, "Steggy")).thenReturn(dinosaurWidget);
+      when(dinosaurStore.createWidget(gameState, worldViewport, "Steggy")).thenReturn(dinosaurWidget);
       
-      systemUnderTest = new WidgetManager<>(gameContent, dinosaursConfiguration, worldViewport, dinosaurStore);
+      systemUnderTest = new WidgetManager<>(gameContent, gameState, worldViewport, dinosaurStore);
    }
    
    @Test
@@ -53,7 +53,7 @@ public class WidgetManagerTest {
    
    @Test
    public void shouldDrawWidgetWhenCreatedAndWorldAvailable() {
-      dinosaursConfiguration.currentWorld().set(new World("World"));
+      gameState.currentWorld().set(new World("World"));
       dinosaurs.add(new Dinosaur("Steggy"));
 
       verify(gameContent).addWidget(dinosaurWidget);

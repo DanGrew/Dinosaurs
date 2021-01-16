@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import uk.dangrew.dinosaurs.game.storage.Asset;
 import uk.dangrew.dinosaurs.game.storage.AssetStore;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.dinosaurs.ui.view.GameContent;
 import uk.dangrew.dinosaurs.ui.view.WorldViewport;
-import uk.dangrew.kode.concept.Concept;
 import uk.dangrew.kode.observable.FunctionListChangeListenerImpl;
 
 /**
@@ -17,10 +17,10 @@ import uk.dangrew.kode.observable.FunctionListChangeListenerImpl;
  * @param <ConceptTypeT>
  * @param <WidgetTypeT>
  */
-public class WidgetManager <ConceptTypeT extends Concept, WidgetTypeT extends AssetWidget> {
+public class WidgetManager <ConceptTypeT extends Asset, WidgetTypeT extends AssetWidget> {
    
    private final GameContent gameContent;
-   private final DinosaursConfiguration dinosaursConfiguration;
+   private final GameState gameState;
    private final WorldViewport worldViewport;
    
    private final AssetStore<ConceptTypeT, WidgetTypeT> assetStore;
@@ -28,13 +28,13 @@ public class WidgetManager <ConceptTypeT extends Concept, WidgetTypeT extends As
    
    public WidgetManager(
          GameContent gameContent,
-         DinosaursConfiguration dinosaursConfiguration,
+         GameState gameState,
          WorldViewport worldViewport,
          AssetStore<ConceptTypeT, WidgetTypeT> assetStore) {
       
       this.widgets = new HashMap<>();
       this.gameContent = gameContent;
-      this.dinosaursConfiguration = dinosaursConfiguration;
+      this.gameState = gameState;
       this.worldViewport = worldViewport;
       this.assetStore = assetStore;
       
@@ -43,8 +43,8 @@ public class WidgetManager <ConceptTypeT extends Concept, WidgetTypeT extends As
    }
    
    private void conceptCreated(ConceptTypeT concept) {
-      WidgetTypeT widget = assetStore.createWidget(dinosaursConfiguration, worldViewport, concept.properties().id());
-      Optional.ofNullable(dinosaursConfiguration.currentWorld().get()).ifPresent(unused -> widget.redraw());
+      WidgetTypeT widget = assetStore.createWidget(gameState, worldViewport, concept.properties().id());
+      Optional.ofNullable(gameState.currentWorld().get()).ifPresent(unused -> widget.redraw());
       gameContent.addWidget(widget);
       widgets.put(concept, widget);
    }

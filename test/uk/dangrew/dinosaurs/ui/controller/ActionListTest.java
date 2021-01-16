@@ -66,4 +66,15 @@ public class ActionListTest {
       assertThat(systemUnderTest.getChildren().contains(button2), equalTo(true));
    }
    
+   @Test
+   public void shouldDisableButtonsWhenActionIsUnavailable() {
+      GameAction gameAction = mock(GameAction.class);
+      when(gameAction.isAvailable()).thenReturn(false);
+      gameActions.add(gameAction);
+
+      Button button = systemUnderTest.buttonFor(gameAction);
+      assertThat(systemUnderTest.getChildren().contains(button), equalTo(true));
+      assertThat(button.isDisable(), equalTo(true));
+   }
+   
 }

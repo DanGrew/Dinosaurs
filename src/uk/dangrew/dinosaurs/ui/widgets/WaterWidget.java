@@ -1,15 +1,16 @@
 
-
 package uk.dangrew.dinosaurs.ui.widgets;
 
 import java.util.Collection;
+import java.util.Objects;
+import java.util.Optional;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 
 /**
@@ -17,24 +18,24 @@ import uk.dangrew.dinosaurs.ui.view.WorldViewport;
  */
 public class WaterWidget extends Pane implements AssetWidget {
    
-   private final DinosaursConfiguration dinosaursConfiguration;
+   private final GameState gameState;
    private final Water water;
    private final WorldViewport worldViewport;
    
-   public WaterWidget(DinosaursConfiguration dinosaursConfiguration, Water water, WorldViewport worldViewport) {
-      this.dinosaursConfiguration = dinosaursConfiguration;
+   public WaterWidget(GameState gameState, Water water, WorldViewport worldViewport) {
+      this.gameState = gameState;
       this.water = water;
       this.worldViewport = worldViewport;
       
-      dinosaursConfiguration.currentWorld().addListener((s, o, n) -> redraw());
+      gameState.currentWorld().addListener((s, o, n) -> redraw());
       worldViewport.topLeftProperty().addListener((s, o, n) -> redraw());
    }
-
+   
    @Override
    public Node getGraphicalComponent() {
       return this;
    }
-
+   
    @Override
    public void redraw() {
       getChildren().clear();
@@ -43,21 +44,24 @@ public class WaterWidget extends Pane implements AssetWidget {
       water.getCoverage().stream()
             .filter(locationsInView::contains)
             .map(this::createWidgetAt)
+            .filter(Objects::nonNull)
             .forEach(getChildren()::add);
    }
-
+   
    @Override
    public void destroy() {
       getChildren().clear();
    }
-
+   
    private Node createWidgetAt(WorldLocation worldLocation) {
-      WorldLocation worldLocationToDisplayAt = worldViewport.translateToScreen(worldLocation);
+      Optional<WorldLocation> worldLocationToDisplayAt = worldViewport.translateToScreen(worldLocation);
+      if (!worldLocationToDisplayAt.isPresent()) {
+         return null;
+      }
+      int worldCellDimension = gameState.worldCellDimension().get();
       
-      int worldCellDimension = dinosaursConfiguration.worldCellDimension().get();
-      
-      int horizontalLocation = worldLocationToDisplayAt.getHorizontal() * worldCellDimension;
-      int verticalLocation = worldLocationToDisplayAt.getVertical() * worldCellDimension;
+      int horizontalLocation = worldLocationToDisplayAt.get().getHorizontal() * worldCellDimension;
+      int verticalLocation = worldLocationToDisplayAt.get().getVertical() * worldCellDimension;
       
       ImageView imageView = water.getLocationPropertiesFor(worldLocation).getTileType().buildRawImageView();
       imageView.setFitWidth(worldCellDimension);

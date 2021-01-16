@@ -2,7 +2,7 @@
 package uk.dangrew.dinosaurs.game.storage;
 
 import uk.dangrew.dinosaurs.game.model.water.Water;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 import uk.dangrew.dinosaurs.ui.widgets.WaterWidget;
 import uk.dangrew.kode.storage.structure.MappedObservableStoreManagerImpl;
@@ -33,9 +33,9 @@ public class WaterStore extends MappedObservableStoreManagerImpl<String, Water> 
    }
    
    @Override
-   public WaterWidget createWidget(DinosaursConfiguration dinosaursConfiguration, WorldViewport worldViewport, String id) {
+   public WaterWidget createWidget(GameState gameState, WorldViewport worldViewport, String id) {
       Water water = get(id);
-      WaterWidget widget = new WaterWidget(dinosaursConfiguration, water, worldViewport);
+      WaterWidget widget = new WaterWidget(gameState, water, worldViewport);
       return widget;
    }
 }

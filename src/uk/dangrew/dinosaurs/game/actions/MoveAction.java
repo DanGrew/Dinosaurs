@@ -20,8 +20,17 @@ public class MoveAction implements GameAction {
    }
 
    @Override
+   public boolean isAvailable() {
+      return true;
+   }
+
+   @Override
    public String describe() {
       return String.format("Move: %s.", movement.name());
+   }
+
+   public Movement movement() {
+      return movement;
    }
 
    @Override

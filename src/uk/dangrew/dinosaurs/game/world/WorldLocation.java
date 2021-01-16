@@ -42,8 +42,19 @@ public class WorldLocation {
    }
 
    public WorldLocation difference(WorldLocation worldLocation, int horizontalCellCount, int verticalCellCount) {
-      int horizontal = (getHorizontal() - worldLocation.getHorizontal()) % horizontalCellCount;
-      int vertical = (getVertical() - worldLocation.getVertical()) % verticalCellCount;
+      int horizontal = Math.floorMod(getHorizontal() - worldLocation.getHorizontal(), horizontalCellCount);
+      int vertical = Math.floorMod(getVertical() - worldLocation.getVertical(), verticalCellCount);
       return new WorldLocation(horizontal, vertical);
+   }
+   
+   public WorldLocation translate(int horizontalAdjustment, int verticalAdjustment, World world){
+      int horizontal = Math.floorMod(getHorizontal() + horizontalAdjustment, world.getHorizontalCellCount());
+      int vertical = Math.floorMod(getVertical() + verticalAdjustment, world.getVerticalCellCount());
+      return new WorldLocation(horizontal, vertical);
+   }
+
+   @Override
+   public String toString() {
+      return String.format("Location: {%d, %d}", getHorizontal(), getVertical());
    }
 }

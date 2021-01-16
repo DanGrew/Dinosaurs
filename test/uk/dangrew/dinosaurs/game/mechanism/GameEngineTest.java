@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.dangrew.dinosaurs.game.actions.GameAction;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 
 @ExtendWith(MockitoExtension.class)
 public class GameEngineTest {
@@ -29,7 +29,7 @@ public class GameEngineTest {
    
    @BeforeEach
    public void initialiseSystemUnderTest() {
-      systemUnderTest = new GameEngine(new DinosaursConfiguration(), assetManager, actionProcessor);
+      systemUnderTest = new GameEngine(new GameState(), assetManager, actionProcessor);
       
       gameActions = asList(mock(GameAction.class), mock(GameAction.class));
       when(actionProcessor.calculateAvailableActions()).thenReturn(gameActions);

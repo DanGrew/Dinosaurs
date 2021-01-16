@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.TextAlignment;
 import uk.dangrew.dinosaurs.game.actions.GameAction;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
 import uk.dangrew.kode.javafx.style.JavaFxStyle;
@@ -33,9 +34,12 @@ public class ActionList extends GridPane {
    
    private void addGameActionAtBottom(GameAction gameAction){
       Button actionButton = new Button(gameAction.describe());
+      actionButton.setTextAlignment(TextAlignment.CENTER);
       actionButton.setMaxWidth(Double.MAX_VALUE);
+      actionButton.setMaxHeight(Double.MAX_VALUE);
       actionButton.setOnAction(e -> gameEngine.executePlayerAction(gameAction));
       actionButtons.put(gameAction, actionButton);
+      actionButton.setDisable(!gameAction.isAvailable());
       add(actionButton, 0, actionButtons.size());
    }
 

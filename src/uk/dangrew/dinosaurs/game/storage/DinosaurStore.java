@@ -2,7 +2,7 @@
 package uk.dangrew.dinosaurs.game.storage;
 
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
-import uk.dangrew.dinosaurs.ui.configuration.DinosaursConfiguration;
+import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 import uk.dangrew.dinosaurs.ui.widgets.DinosaurWidget;
 import uk.dangrew.kode.storage.structure.MappedObservableStoreManagerImpl;
@@ -33,9 +33,9 @@ public class DinosaurStore extends MappedObservableStoreManagerImpl<String, Dino
    }
    
    @Override
-   public DinosaurWidget createWidget(DinosaursConfiguration dinosaursConfiguration, WorldViewport worldViewport, String id) {
+   public DinosaurWidget createWidget(GameState gameState, WorldViewport worldViewport, String id) {
       Dinosaur concept = get(id);
-      DinosaurWidget widget = new DinosaurWidget(dinosaursConfiguration, concept, worldViewport);
+      DinosaurWidget widget = new DinosaurWidget(gameState, concept, worldViewport);
       return widget;
    }
 }
