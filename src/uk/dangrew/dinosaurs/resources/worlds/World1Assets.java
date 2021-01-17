@@ -14,8 +14,11 @@ import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.WATER_BOTTOM_R
 import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.WATER_TOP_LEFT_CORNER;
 import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.WATER_TOP_RIGHT_CORNER;
 
+import uk.dangrew.dinosaurs.game.building.TreeBuilder;
+import uk.dangrew.dinosaurs.game.building.WaterBuilder;
 import uk.dangrew.dinosaurs.game.mechanism.AssetManager;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
+import uk.dangrew.dinosaurs.game.model.greenery.Tree;
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.game.model.water.WaterLocationProperties;
 import uk.dangrew.dinosaurs.game.world.World;
@@ -50,47 +53,63 @@ public class World1Assets {
       asList(
             new WorldLocation(16, 4),
             new WorldLocation(17, 4))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, HORIZONTAL_GRASS_TOP)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, HORIZONTAL_GRASS_TOP)));
       asList(
             new WorldLocation(16, 8),
             new WorldLocation(15, 5),
             new WorldLocation(15, 6))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, VERTICAL_GRASS_LEFT)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, VERTICAL_GRASS_LEFT)));
       asList(
             new WorldLocation(19, 7),
             new WorldLocation(19, 8),
             new WorldLocation(18, 5))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, VERTICAL_GRASS_RIGHT)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, VERTICAL_GRASS_RIGHT)));
       asList(
             new WorldLocation(15, 4))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_BOTTOM_RIGHT_CORNER)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_BOTTOM_RIGHT_CORNER)));
       asList(
             new WorldLocation(19, 6),
             new WorldLocation(18, 4))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_BOTTOM_LEFT_CORNER)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_BOTTOM_LEFT_CORNER)));
       asList(
             new WorldLocation(18, 10),
             new WorldLocation(19, 9))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_TOP_LEFT_CORNER)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_TOP_LEFT_CORNER)));
       asList(
             new WorldLocation(16, 9),
             new WorldLocation(17, 10),
             new WorldLocation(15, 7))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_TOP_RIGHT_CORNER)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_TOP_RIGHT_CORNER)));
       asList(
             new WorldLocation(18, 6))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_TOP_RIGHT_CORNER)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_TOP_RIGHT_CORNER)));
       asList(
             new WorldLocation(18, 9))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_BOTTOM_RIGHT_CORNER)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_BOTTOM_RIGHT_CORNER)));
       asList(
             new WorldLocation(16, 7),
             new WorldLocation(17, 9))
-            .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_BOTTOM_LEFT_CORNER)));
+                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_BOTTOM_LEFT_CORNER)));
       
+      Water generated = assetManager.getWaterStore().createConcept("Generated");
+      new WaterBuilder(generated, world)
+            .coverRectangle(new WorldLocation(2, 2), 6, 7)
+            .coverRectangle(new WorldLocation(7, 4), 3, 3)
+            .coverRectangle(new WorldLocation(7, 8), 3, 3)
+            .append(new WorldLocation(8, 3))
+            .subtract(new WorldLocation(2, 8))
+            .build();
       
       this.player = assetManager.getDinosaurStore().createConcept("Steggy");
       player.getWorldLocation().set(new WorldLocation(10, 10));
+      
+      Tree tree = assetManager.getTreeStore().createConcept("Tree");
+      tree.setWorldLocation(new WorldLocation(10, 2));
+      tree.setHeight(2);
+      
+      new TreeBuilder(world, assetManager.getTreeStore())
+            .straightLine(new WorldLocation(2, 2), 0, 1, 5)
+            .straightLine(new WorldLocation(7, 2), 1, 1, 3);
    }
    
    public Dinosaur getPlayer() {

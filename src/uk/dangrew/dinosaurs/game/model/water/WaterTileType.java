@@ -2,12 +2,12 @@
 
 package uk.dangrew.dinosaurs.game.model.water;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import uk.dangrew.dinosaurs.resources.DinosaurImages;
-
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * Types of graphical tiles for water locations.
@@ -64,7 +64,15 @@ public enum WaterTileType {
          DinosaurImages::waterWithGrassCorner,
          imageView -> imageView.setRotate(270)
    ),
-   
+
+   WATER_DIAGONAL_BOTTOM_LEFT_TOP_RIGHT(
+         DinosaurImages::waterDiagonalBottomLeftTopRight,
+         view -> {}
+   ),
+   WATER_DIAGONAL_TOP_LEFT_BOTTOM_RIGHT(
+         DinosaurImages::waterDiagonalBottomLeftTopRight,
+         imageView -> imageView.setRotate(90)
+   ),
    SURROUNDED(
          DinosaurImages::waterSurrounded,
          view -> {}

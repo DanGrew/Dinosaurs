@@ -1,7 +1,14 @@
 package uk.dangrew.dinosaurs.game.mechanism;
 
+import static java.util.Arrays.asList;
+
+import java.util.Collection;
+
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
+import uk.dangrew.dinosaurs.game.storage.Asset;
+import uk.dangrew.dinosaurs.game.storage.AssetStore;
 import uk.dangrew.dinosaurs.game.storage.DinosaurStore;
+import uk.dangrew.dinosaurs.game.storage.TreeStore;
 import uk.dangrew.dinosaurs.game.storage.WaterStore;
 import uk.dangrew.dinosaurs.game.storage.WorldStore;
 import uk.dangrew.dinosaurs.game.world.World;
@@ -15,6 +22,7 @@ public class AssetManager {
    private final WorldStore worldStore;
    private final DinosaurStore dinosaurStore;
    private final WaterStore waterStore;
+   private final TreeStore treeStore;
    
    private final World1Assets world1Assets;
    
@@ -22,6 +30,7 @@ public class AssetManager {
       this.worldStore = new WorldStore();
       this.dinosaurStore = new DinosaurStore();
       this.waterStore = new WaterStore();
+      this.treeStore = new TreeStore();
       this.world1Assets = new World1Assets(this);
    }
    
@@ -41,12 +50,20 @@ public class AssetManager {
       return worldStore;
    }
 
+   public TreeStore getTreeStore() {
+      return treeStore;
+   }
+
    public DinosaurStore getDinosaurStore() {
       return dinosaurStore;
    }
 
    public WaterStore getWaterStore() {
       return waterStore;
+   }
+   
+   public Collection<AssetStore<? extends Asset, ?>> getCollidableAssetStores(){
+      return asList(waterStore, treeStore);
    }
 
 }

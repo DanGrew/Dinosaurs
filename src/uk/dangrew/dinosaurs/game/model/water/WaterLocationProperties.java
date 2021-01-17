@@ -6,19 +6,34 @@ package uk.dangrew.dinosaurs.game.model.water;
  */
 public class WaterLocationProperties {
    
-   private final WaterDepth depth;
-   private final WaterTileType tileType;
+   private static final WaterTileType DEFAULT_TILE_TYPE = WaterTileType.SURROUNDED;
+   private static final int DEFAULT_DEPTH = 0;
    
-   public WaterLocationProperties(int depth, WaterTileType tileType){
+   private WaterDepth depth;
+   private WaterTileType tileType;
+   
+   public WaterLocationProperties() {
+      this(DEFAULT_DEPTH, DEFAULT_TILE_TYPE);
+   }
+   
+   public WaterLocationProperties(int depth, WaterTileType tileType) {
       this.depth = new WaterDepth(depth);
       this.tileType = tileType;
    }
-
+   
    public WaterDepth getDepth() {
       return depth;
    }
 
+   public void setDepth(WaterDepth depth) {
+      this.depth = depth;
+   }
+
    public WaterTileType getTileType() {
       return tileType;
+   }
+
+   public void setTileType(WaterTileType tileType) {
+      this.tileType = tileType;
    }
 }

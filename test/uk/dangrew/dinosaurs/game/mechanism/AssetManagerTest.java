@@ -1,7 +1,8 @@
 
 package uk.dangrew.dinosaurs.game.mechanism;
 
-import static org.junit.Assert.fail;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,8 @@ public class AssetManagerTest {
    }
    
    @Test
-   public void should() {
-      fail();
+   public void shouldProvideCollidableAssets() {
+      assertThat(systemUnderTest.getCollidableAssetStores(), containsInAnyOrder(systemUnderTest.getTreeStore(), systemUnderTest.getWaterStore()));
    }
    
 }

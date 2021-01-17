@@ -18,7 +18,7 @@ import uk.dangrew.kode.concept.Properties;
 public class Water implements Asset {
    
    private final Properties properties;
-   private final Map<WorldLocation, WaterLocationProperties> locationProperties;
+   private final Map<WorldLocation, WaterLocationProperties> waterLocationProperties;
    private final WaterCollisionDetector waterCollisionDetector;
    
    public Water(String name) {
@@ -31,7 +31,7 @@ public class Water implements Asset {
    
    Water(Properties properties){
       this.properties = properties;
-      this.locationProperties = new LinkedHashMap<>();
+      this.waterLocationProperties = new LinkedHashMap<>();
       this.waterCollisionDetector = new WaterCollisionDetector(this);
    }
 
@@ -51,14 +51,23 @@ public class Water implements Asset {
    }
 
    public Collection<WorldLocation> getCoverage() {
-      return locationProperties.keySet();
+      return waterLocationProperties.keySet();
    }
    
-   public void cover(WorldLocation worldLocation, WaterLocationProperties locationProperties){
-      this.locationProperties.put(worldLocation, locationProperties);
+   public void cover(WorldLocation worldLocation){
+      cover(worldLocation, new WaterLocationProperties());
    }
+
+   public void cover(WorldLocation worldLocation, WaterLocationProperties locationProperties){
+      waterLocationProperties.put(worldLocation, locationProperties);
+   }
+   
+   public void remove(WorldLocation worldLocation){
+      waterLocationProperties.remove(worldLocation);
+   }
+
    
    public WaterLocationProperties getLocationPropertiesFor(WorldLocation worldLocation){
-      return locationProperties.get(worldLocation);
+      return waterLocationProperties.get(worldLocation);
    }
 }

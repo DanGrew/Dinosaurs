@@ -15,6 +15,8 @@ import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 
 public class DinosaurWidget extends Pane implements AssetWidget {
    
+   private static final int RADIUS_SCALE_FACTOR = 2;
+   
    private final GameState gameState;
    private final Dinosaur dinosaur;
    private final WorldViewport worldViewport;
@@ -58,7 +60,7 @@ public class DinosaurWidget extends Pane implements AssetWidget {
       int worldCellDimension = gameState.worldCellDimension().get();
       int worldCellRadius = gameState.worldCellRadius().get();
       
-      Circle widget = new Circle(gameState.worldCellRadius().get());
+      Circle widget = new Circle(gameState.worldCellRadius().get() / RADIUS_SCALE_FACTOR);
       int horizontalLocation = worldLocation.getHorizontal() * worldCellDimension + worldCellRadius;
       int verticalLocation = worldLocation.getVertical() * worldCellDimension + worldCellRadius;
       widget.setCenterX(horizontalLocation);

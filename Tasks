@@ -1,7 +1,9 @@
 HIGH
 World in location constructor + testing
-Water creation in blocks, squares, or circles
-
+Hover labels for assets
+Layers - collisions, edibles, drinkables
+Health, hunger, thirst - actions to populate
+Different trees, bushes, rocks, caves
 
 MEDIUM
 Fix publishing in gradle scripts
