@@ -7,7 +7,8 @@ import javafx.scene.image.Image;
 public class DinosaurImages {
    
    private static final Image GRASS;
-   private static final Image TREE;
+   private static final Image TREE_ROUNDED;
+   private static final Image TREE_SPIKEY;
    private static final Image WATER_STRAIGHT;
    private static final Image GRASS_WITH_WATER_CORNER;
    private static final Image WATER_WITH_GRASS_CORNER;
@@ -16,7 +17,8 @@ public class DinosaurImages {
    
    static {
       GRASS = new Image(DinosaurImages.class.getResourceAsStream("grass.png"));
-      TREE = new Image(DinosaurImages.class.getResourceAsStream("tree.png"));
+      TREE_ROUNDED = new Image(DinosaurImages.class.getResourceAsStream("tree-rounded.png"));
+      TREE_SPIKEY = new Image(DinosaurImages.class.getResourceAsStream("tree-spikey.png"));
       WATER_STRAIGHT = new Image(DinosaurImages.class.getResourceAsStream("water-straight.png"));
       GRASS_WITH_WATER_CORNER = new Image(DinosaurImages.class.getResourceAsStream("grass-with-water-corner.png"));
       WATER_WITH_GRASS_CORNER = new Image(DinosaurImages.class.getResourceAsStream("water-with-grass-corner.png"));
@@ -28,8 +30,12 @@ public class DinosaurImages {
       return GRASS;
    }
 
-   public Image tree(){
-      return TREE;
+   public Image treeRounded(){
+      return TREE_ROUNDED;
+   }
+
+   public Image treeSpikey(){
+      return TREE_SPIKEY;
    }
    
    public Image waterStraight() {

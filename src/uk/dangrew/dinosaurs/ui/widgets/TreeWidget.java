@@ -2,8 +2,10 @@
 package uk.dangrew.dinosaurs.ui.widgets;
 
 import java.util.Optional;
+import java.util.Random;
 
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import uk.dangrew.dinosaurs.game.model.greenery.Tree;
@@ -15,15 +17,18 @@ import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 public class TreeWidget extends Pane implements AssetWidget {
 
    private static final double WIDGET_SCALE_FACTOR = 1.5;
-   
+   private static final Random RANDOM = new Random();
+         
    private final GameState gameState;
    private final WorldViewport worldViewport;
    private final Tree tree;
+   private final Image image;
    
    public TreeWidget(GameState gameState, Tree tree, WorldViewport worldViewport) {
       this.gameState = gameState;
       this.worldViewport = worldViewport;
       this.tree = tree;
+      this.image = RANDOM.nextBoolean() ? new DinosaurImages().treeRounded() : new DinosaurImages().treeSpikey();
 
       gameState.currentWorld().addListener((s, o, n) -> redraw());
       worldViewport.topLeftProperty().addListener((s, o, n) -> redraw());
@@ -55,7 +60,7 @@ public class TreeWidget extends Pane implements AssetWidget {
       int horizontalLocation = worldLocationToDisplayAt.get().getHorizontal() * worldCellDimension;
       int verticalLocation = worldLocationToDisplayAt.get().getVertical() * worldCellDimension;
 
-      ImageView imageView = new ImageView(new DinosaurImages().tree());
+      ImageView imageView = new ImageView(image);
       imageView.setFitWidth(worldCellDimension * WIDGET_SCALE_FACTOR);
       imageView.setFitHeight(worldCellDimension * WIDGET_SCALE_FACTOR);
       imageView.setX(horizontalLocation);

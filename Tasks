@@ -3,7 +3,7 @@ World in location constructor + testing
 Hover labels for assets
 Layers - collisions, edibles, drinkables
 Health, hunger, thirst - actions to populate
-Different trees, bushes, rocks, caves
+Bushes, rocks, caves
 
 MEDIUM
 Fix publishing in gradle scripts
