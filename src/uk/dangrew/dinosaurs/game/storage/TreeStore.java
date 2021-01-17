@@ -10,7 +10,7 @@ import uk.dangrew.kode.storage.structure.MappedObservableStoreManagerImpl;
 public class TreeStore extends MappedObservableStoreManagerImpl<String, Tree> implements AssetStore<Tree, TreeWidget> {
    
    public TreeStore() {
-      super(water -> water.properties().id());
+      super(concept -> concept.properties().id());
    }
    
    @Override

@@ -88,7 +88,7 @@ public enum WaterTileType {
       this.imageOrientation = imageOrientation;
    }
    
-   public ImageView buildRawImageView() {
+   public ImageView buildImageView() {
       ImageView imageView = new ImageView(imageProvider.apply(DINOSAUR_IMAGES));
       imageOrientation.accept(imageView);
       return imageView;

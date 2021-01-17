@@ -18,7 +18,8 @@ public class AssetManagerTest {
    
    @Test
    public void shouldProvideCollidableAssets() {
-      assertThat(systemUnderTest.getCollidableAssetStores(), containsInAnyOrder(systemUnderTest.getTreeStore(), systemUnderTest.getWaterStore()));
+      assertThat(systemUnderTest.getCollidableAssetStores(), containsInAnyOrder(
+            systemUnderTest.getTreeStore(), systemUnderTest.getWaterStore(), systemUnderTest.getRockStore()));
    }
    
 }

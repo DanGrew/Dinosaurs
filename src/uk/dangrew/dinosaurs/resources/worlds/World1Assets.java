@@ -19,6 +19,8 @@ import uk.dangrew.dinosaurs.game.building.WaterBuilder;
 import uk.dangrew.dinosaurs.game.mechanism.AssetManager;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.model.greenery.Tree;
+import uk.dangrew.dinosaurs.game.model.rubble.Rock;
+import uk.dangrew.dinosaurs.game.model.rubble.RockTileType;
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.game.model.water.WaterLocationProperties;
 import uk.dangrew.dinosaurs.game.world.World;
@@ -99,14 +101,46 @@ public class World1Assets {
             .append(new WorldLocation(8, 3, world))
             .subtract(new WorldLocation(2, 8, world))
             .build();
+
+      Rock r1 = assetManager.getRockStore().createConcept("1");
+      r1.setWorldLocation(new WorldLocation(3, 18, world));
+      r1.setRockTileType(RockTileType.ROCK);
+
+      Rock r2 = assetManager.getRockStore().createConcept("2");
+      r2.setWorldLocation(new WorldLocation(4, 18, world));
+      r2.setRockTileType(RockTileType.ROCK);
+
+      Rock r3 = assetManager.getRockStore().createConcept("3");
+      r3.setWorldLocation(new WorldLocation(5, 18, world));
+      r3.setRockTileType(RockTileType.ROCK);
+      
+      Rock r6 = assetManager.getRockStore().createConcept("6");
+      r6.setWorldLocation(new WorldLocation(5, 15, world));
+      r6.setRockTileType(RockTileType.ROCK_BOTTOM_RIGHT_CORNER);
+
+      Rock r7 = assetManager.getRockStore().createConcept("7");
+      r7.setWorldLocation(new WorldLocation(6, 15, world));
+      r7.setRockTileType(RockTileType.ROCK_BOTTOM_LEFT_CORNER);
+
+      Rock r4 = assetManager.getRockStore().createConcept("4");
+      r4.setWorldLocation(new WorldLocation(5, 16, world));
+      r4.setRockTileType(RockTileType.ROCK_TOP_RIGHT_CORNER);
+
+      Rock r5 = assetManager.getRockStore().createConcept("5");
+      r5.setWorldLocation(new WorldLocation(6, 16, world));
+      r5.setRockTileType(RockTileType.ROCK_TOP_LEFT_CORNER);
+
+      Rock r8 = assetManager.getRockStore().createConcept("8");
+      r8.setWorldLocation(new WorldLocation(8, 15, world));
+      r8.setRockTileType(RockTileType.ROCK_CAVE);
       
       this.player = assetManager.getDinosaurStore().createConcept("Steggy");
       player.getWorldLocation().set(new WorldLocation(10, 10, world));
-      
+
       Tree tree = assetManager.getTreeStore().createConcept("Tree");
       tree.setWorldLocation(new WorldLocation(10, 2, world));
       tree.setHeight(2);
-      
+
       new TreeBuilder(world, assetManager.getTreeStore())
             .straightLine(new WorldLocation(2, 2, world), 0, 1, 5)
             .straightLine(new WorldLocation(7, 2, world), 1, 1, 3);

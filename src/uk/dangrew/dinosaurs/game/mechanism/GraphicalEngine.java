@@ -3,6 +3,7 @@ package uk.dangrew.dinosaurs.game.mechanism;
 
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.model.greenery.Tree;
+import uk.dangrew.dinosaurs.game.model.rubble.Rock;
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.ui.configuration.GameState;
@@ -11,6 +12,7 @@ import uk.dangrew.dinosaurs.ui.view.GameContent;
 import uk.dangrew.dinosaurs.ui.view.PlayerFocusController;
 import uk.dangrew.dinosaurs.ui.view.WorldViewport;
 import uk.dangrew.dinosaurs.ui.widgets.DinosaurWidget;
+import uk.dangrew.dinosaurs.ui.widgets.RockWidget;
 import uk.dangrew.dinosaurs.ui.widgets.TreeWidget;
 import uk.dangrew.dinosaurs.ui.widgets.WaterWidget;
 import uk.dangrew.dinosaurs.ui.widgets.WidgetManager;
@@ -31,6 +33,7 @@ public class GraphicalEngine {
    private final WidgetManager<Dinosaur, DinosaurWidget> dinosaurWidgets;
    private final WidgetManager<Water, WaterWidget> waterWidgets;
    private final WidgetManager<Tree, TreeWidget> treeWidgets;
+   private final WidgetManager<Rock, RockWidget> rockWidgets;
    
    private final GameContent gameContent;
    
@@ -47,6 +50,7 @@ public class GraphicalEngine {
       this.dinosaurWidgets = new WidgetManager<>(gameContent, gameState, worldViewport, assetManager.getDinosaurStore());
       this.waterWidgets = new WidgetManager<>(gameContent, gameState, worldViewport, assetManager.getWaterStore());
       this.treeWidgets = new WidgetManager<>(gameContent, gameState, worldViewport, assetManager.getTreeStore());
+      this.rockWidgets = new WidgetManager<>(gameContent, gameState, worldViewport, assetManager.getRockStore());
    }
    
    public CameraController getCameraController() {
