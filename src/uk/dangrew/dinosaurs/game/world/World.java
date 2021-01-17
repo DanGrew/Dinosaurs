@@ -3,7 +3,6 @@ package uk.dangrew.dinosaurs.game.world;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import uk.dangrew.dinosaurs.game.actions.Movement;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
 import uk.dangrew.dinosaurs.game.collision.NoCollisions;
 import uk.dangrew.dinosaurs.game.storage.Asset;
@@ -62,12 +61,5 @@ public class World implements Asset {
    @Override
    public CollisionDetector getCollisionDetector() {
       return collisionDetector;
-   }
-   
-   public WorldLocation locationForMovement(WorldLocation worldLocation, Movement movement) {
-      WorldLocation rawMove = movement.rawMove(worldLocation);
-      return new WorldLocation(
-            Math.floorMod(rawMove.getHorizontal(), getHorizontalCellCount()),
-            Math.floorMod(rawMove.getVertical(), getVerticalCellCount()));
    }
 }

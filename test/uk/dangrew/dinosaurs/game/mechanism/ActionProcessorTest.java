@@ -43,7 +43,7 @@ public class ActionProcessorTest {
       world = new World("World");
       world.setDimension(10, 10);
       player = new Dinosaur("Dino!");
-      player.getWorldLocation().set(new WorldLocation(5, 5));
+      player.getWorldLocation().set(new WorldLocation(5, 5, world));
 
       gameState = new GameState();
       gameState.currentWorld().set(world);
@@ -64,7 +64,7 @@ public class ActionProcessorTest {
    @ParameterizedTest
    @EnumSource(value = Movement.class)
    public void shouldProvideUnavailableMovementWhenColliding(Movement movement) {
-      lenient().when(collisionDetection.calculateCollisions(player, world.locationForMovement(player.expectLocation(), movement)))
+      lenient().when(collisionDetection.calculateCollisions(player, movement.move(player.expectLocation(), world)))
             .thenReturn(singleton(new Collision("")));
       
       UnnavailableAction unavailable = systemUnderTest.calculateAvailableActions().stream()

@@ -41,75 +41,75 @@ public class World1Assets {
       
       Water water = assetManager.getWaterStore().createConcept("My First Pond");
       asList(
-            new WorldLocation(16, 5),
-            new WorldLocation(16, 6),
-            new WorldLocation(17, 5),
-            new WorldLocation(17, 6),
-            new WorldLocation(17, 7),
-            new WorldLocation(17, 8),
-            new WorldLocation(18, 7),
-            new WorldLocation(18, 8))
+            new WorldLocation(16, 5, world),
+            new WorldLocation(16, 6, world),
+            new WorldLocation(17, 5, world),
+            new WorldLocation(17, 6, world),
+            new WorldLocation(17, 7, world),
+            new WorldLocation(17, 8, world),
+            new WorldLocation(18, 7, world),
+            new WorldLocation(18, 8, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(1, SURROUNDED)));
       asList(
-            new WorldLocation(16, 4),
-            new WorldLocation(17, 4))
+            new WorldLocation(16, 4, world),
+            new WorldLocation(17, 4, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, HORIZONTAL_GRASS_TOP)));
       asList(
-            new WorldLocation(16, 8),
-            new WorldLocation(15, 5),
-            new WorldLocation(15, 6))
+            new WorldLocation(16, 8, world),
+            new WorldLocation(15, 5, world),
+            new WorldLocation(15, 6, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, VERTICAL_GRASS_LEFT)));
       asList(
-            new WorldLocation(19, 7),
-            new WorldLocation(19, 8),
-            new WorldLocation(18, 5))
+            new WorldLocation(19, 7, world),
+            new WorldLocation(19, 8, world),
+            new WorldLocation(18, 5, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, VERTICAL_GRASS_RIGHT)));
       asList(
-            new WorldLocation(15, 4))
+            new WorldLocation(15, 4, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_BOTTOM_RIGHT_CORNER)));
       asList(
-            new WorldLocation(19, 6),
-            new WorldLocation(18, 4))
+            new WorldLocation(19, 6, world),
+            new WorldLocation(18, 4, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_BOTTOM_LEFT_CORNER)));
       asList(
-            new WorldLocation(18, 10),
-            new WorldLocation(19, 9))
+            new WorldLocation(18, 10, world),
+            new WorldLocation(19, 9, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_TOP_LEFT_CORNER)));
       asList(
-            new WorldLocation(16, 9),
-            new WorldLocation(17, 10),
-            new WorldLocation(15, 7))
+            new WorldLocation(16, 9, world),
+            new WorldLocation(17, 10, world),
+            new WorldLocation(15, 7, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_TOP_RIGHT_CORNER)));
       asList(
-            new WorldLocation(18, 6))
+            new WorldLocation(18, 6, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_TOP_RIGHT_CORNER)));
       asList(
-            new WorldLocation(18, 9))
+            new WorldLocation(18, 9, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_BOTTOM_RIGHT_CORNER)));
       asList(
-            new WorldLocation(16, 7),
-            new WorldLocation(17, 9))
+            new WorldLocation(16, 7, world),
+            new WorldLocation(17, 9, world))
                   .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_BOTTOM_LEFT_CORNER)));
       
       Water generated = assetManager.getWaterStore().createConcept("Generated");
       new WaterBuilder(generated, world)
-            .coverRectangle(new WorldLocation(2, 2), 6, 7)
-            .coverRectangle(new WorldLocation(7, 4), 3, 3)
-            .coverRectangle(new WorldLocation(7, 8), 3, 3)
-            .append(new WorldLocation(8, 3))
-            .subtract(new WorldLocation(2, 8))
+            .coverRectangle(new WorldLocation(2, 2, world), 6, 7)
+            .coverRectangle(new WorldLocation(7, 4, world), 3, 3)
+            .coverRectangle(new WorldLocation(7, 8, world), 3, 3)
+            .append(new WorldLocation(8, 3, world))
+            .subtract(new WorldLocation(2, 8, world))
             .build();
       
       this.player = assetManager.getDinosaurStore().createConcept("Steggy");
-      player.getWorldLocation().set(new WorldLocation(10, 10));
+      player.getWorldLocation().set(new WorldLocation(10, 10, world));
       
       Tree tree = assetManager.getTreeStore().createConcept("Tree");
-      tree.setWorldLocation(new WorldLocation(10, 2));
+      tree.setWorldLocation(new WorldLocation(10, 2, world));
       tree.setHeight(2);
       
       new TreeBuilder(world, assetManager.getTreeStore())
-            .straightLine(new WorldLocation(2, 2), 0, 1, 5)
-            .straightLine(new WorldLocation(7, 2), 1, 1, 3);
+            .straightLine(new WorldLocation(2, 2, world), 0, 1, 5)
+            .straightLine(new WorldLocation(7, 2, world), 1, 1, 3);
    }
    
    public Dinosaur getPlayer() {

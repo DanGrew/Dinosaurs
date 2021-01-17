@@ -35,7 +35,7 @@ public class MoveAction implements GameAction {
 
    @Override
    public void performAction() {
-      WorldLocation movementAfterMove = world.locationForMovement(dinosaur.getWorldLocation().get(), movement);
+      WorldLocation movementAfterMove = movement.move(dinosaur.getWorldLocation().get(), world);
       dinosaur.getWorldLocation().set(movementAfterMove);
    }
 }

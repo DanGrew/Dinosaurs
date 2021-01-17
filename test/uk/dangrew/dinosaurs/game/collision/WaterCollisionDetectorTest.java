@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.game.model.water.WaterLocationProperties;
-import uk.dangrew.dinosaurs.game.world.WorldLocation;
+import uk.dangrew.dinosaurs.game.world.TestWorldLocation;
 
 public class WaterCollisionDetectorTest {
    
@@ -26,13 +26,13 @@ public class WaterCollisionDetectorTest {
    
    @Test
    public void shouldAllowDinosaurWithReasonableHeight() {
-      water.cover(new WorldLocation(5, 5), new WaterLocationProperties(0, null));
-      assertThat(systemUnderTest.canLocationBeOccupied(dinosaur, new WorldLocation(5, 5)).isPresent(), equalTo(false));
+      water.cover(new TestWorldLocation(5, 5), new WaterLocationProperties(0, null));
+      assertThat(systemUnderTest.canLocationBeOccupied(dinosaur, new TestWorldLocation(5, 5)).isPresent(), equalTo(false));
    }
    
    @Test
    public void shouldPreventDinosaurWhoIsTooShortForDepth() {
-      water.cover(new WorldLocation(5, 5), new WaterLocationProperties(3, null));
-      assertThat(systemUnderTest.canLocationBeOccupied(dinosaur, new WorldLocation(5, 5)).isPresent(), equalTo(true));
+      water.cover(new TestWorldLocation(5, 5), new WaterLocationProperties(3, null));
+      assertThat(systemUnderTest.canLocationBeOccupied(dinosaur, new TestWorldLocation(5, 5)).isPresent(), equalTo(true));
    }
 }

@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
+import uk.dangrew.dinosaurs.game.world.TestWorldLocation;
 import uk.dangrew.dinosaurs.game.world.World;
-import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.GameState;
 
 public class PlayerFocusControllerTest {
@@ -30,56 +30,56 @@ public class PlayerFocusControllerTest {
       world.setDimension(10, 10);
       gameState.currentWorld().set(world);
       player = new Dinosaur("Dino");
-      player.getWorldLocation().set(new WorldLocation(5, 5));
+      player.getWorldLocation().set(new TestWorldLocation(5, 5));
       gameState.currentPlayer().set(player);
    }
    
    @Test
    public void shouldPanRightWhenMovingOutsideViewport() {
-      player.getWorldLocation().set(new WorldLocation(10, 5));
-      assertThat(worldViewport.topLeft(), equalTo(new WorldLocation(9, 0)));
+      player.getWorldLocation().set(new TestWorldLocation(10, 5));
+      assertThat(worldViewport.topLeft(), equalTo(new TestWorldLocation(9, 0)));
    }
    
    @Test
    public void shouldNotPanRightIfWitihinViewPort() {
-      player.getWorldLocation().set(new WorldLocation(6, 5));
-      assertThat(worldViewport.topLeft(), equalTo(new WorldLocation(0, 0)));
+      player.getWorldLocation().set(new TestWorldLocation(6, 5));
+      assertThat(worldViewport.topLeft(), equalTo(new TestWorldLocation(0, 0)));
    }
 
    @Test
    public void shouldPanLeftWhenMovingOutsideViewport() {
-      player.getWorldLocation().set(new WorldLocation(10, 5));
-      assertThat(worldViewport.topLeft(), equalTo(new WorldLocation(9, 0)));
+      player.getWorldLocation().set(new TestWorldLocation(10, 5));
+      assertThat(worldViewport.topLeft(), equalTo(new TestWorldLocation(9, 0)));
    }
 
    @Test
    public void shouldNotPanLeftIfWitihinViewPort() {
-      player.getWorldLocation().set(new WorldLocation(4, 5));
-      assertThat(worldViewport.topLeft(), equalTo(new WorldLocation(0, 0)));
+      player.getWorldLocation().set(new TestWorldLocation(4, 5));
+      assertThat(worldViewport.topLeft(), equalTo(new TestWorldLocation(0, 0)));
    }
 
    @Test
    public void shouldPanTopWhenMovingOutsideViewport() {
-      player.getWorldLocation().set(new WorldLocation(5, 0));
-      assertThat(worldViewport.topLeft(), equalTo(new WorldLocation(0, 9)));
+      player.getWorldLocation().set(new TestWorldLocation(5, 0));
+      assertThat(worldViewport.topLeft(), equalTo(new TestWorldLocation(0, 9)));
    }
 
    @Test
    public void shouldNotPanTopIfWitihinViewPort() {
-      player.getWorldLocation().set(new WorldLocation(5, 4));
-      assertThat(worldViewport.topLeft(), equalTo(new WorldLocation(0, 0)));
+      player.getWorldLocation().set(new TestWorldLocation(5, 4));
+      assertThat(worldViewport.topLeft(), equalTo(new TestWorldLocation(0, 0)));
    }
 
    @Test
    public void shouldPanBottomWhenMovingOutsideViewport() {
-      player.getWorldLocation().set(new WorldLocation(5, 9));
-      assertThat(worldViewport.topLeft(), equalTo(new WorldLocation(0, 1)));
+      player.getWorldLocation().set(new TestWorldLocation(5, 9));
+      assertThat(worldViewport.topLeft(), equalTo(new TestWorldLocation(0, 1)));
    }
 
    @Test
    public void shouldNotPanBottomIfWitihinViewPort() {
-      player.getWorldLocation().set(new WorldLocation(5, 6));
-      assertThat(worldViewport.topLeft(), equalTo(new WorldLocation(0, 0)));
+      player.getWorldLocation().set(new TestWorldLocation(5, 6));
+      assertThat(worldViewport.topLeft(), equalTo(new TestWorldLocation(0, 0)));
    }
    
 }

@@ -16,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.dangrew.dinosaurs.game.model.water.Water;
+import uk.dangrew.dinosaurs.game.world.TestWorldLocation;
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 
@@ -39,47 +40,47 @@ public class WaterBuilderTest {
    
    @Test
    public void shouldCoverRectangle() {
-      systemUnderTest.coverRectangle(new WorldLocation(1, 1), 3, 2);
+      systemUnderTest.coverRectangle(new TestWorldLocation(1, 1), 3, 2);
       assertThat(water.getCoverage(), hasSize(6));
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(1, 1)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(2, 1)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(3, 1)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(1, 2)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(2, 2)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(3, 2)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(1, 1)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(2, 1)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(3, 1)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(1, 2)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(2, 2)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(3, 2)), notNullValue());
    }
    
    @Test
    public void shouldCoverRectangleWrappingWorld() {
-      systemUnderTest.coverRectangle(new WorldLocation(9, 9), 3, 2);
+      systemUnderTest.coverRectangle(new TestWorldLocation(9, 9), 3, 2);
       assertThat(water.getCoverage(), hasSize(6));
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(9, 9)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(0, 9)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(1, 9)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(9, 0)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(0, 0)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(1, 0)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(9, 9)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(0, 9)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(1, 9)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(9, 0)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(0, 0)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(1, 0)), notNullValue());
    }
    
    @Test
    public void shouldAppend() {
       systemUnderTest
-            .append(new WorldLocation(1, 2))
-            .append(new WorldLocation(2, 3));
+            .append(new TestWorldLocation(1, 2))
+            .append(new TestWorldLocation(2, 3));
       assertThat(water.getCoverage(), hasSize(2));
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(1, 2)), notNullValue());
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(2, 3)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(1, 2)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(2, 3)), notNullValue());
    }
    
    @Test
    public void shouldRemove() {
       systemUnderTest
-            .append(new WorldLocation(1, 2))
-            .append(new WorldLocation(2, 3))
-            .subtract(new WorldLocation(1, 2));
+            .append(new TestWorldLocation(1, 2))
+            .append(new TestWorldLocation(2, 3))
+            .subtract(new TestWorldLocation(1, 2));
       
       assertThat(water.getCoverage(), hasSize(1));
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(2, 3)), notNullValue());
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(2, 3)), notNullValue());
    }
    
    @Test
@@ -87,7 +88,7 @@ public class WaterBuilderTest {
       doReturn(HORIZONTAL_GRASS_TOP).when(waterTileCalculator).calculateTileType(any());
       
       systemUnderTest
-            .coverRectangle(new WorldLocation(0, 0), 3, 3)
+            .coverRectangle(new TestWorldLocation(0, 0), 3, 3)
             .build();
       assertThat(water.getCoverage(), hasSize(9));
       
@@ -99,7 +100,7 @@ public class WaterBuilderTest {
    @Test
    public void shouldPopulateShallowDepths() {
       systemUnderTest
-            .coverRectangle(new WorldLocation(0, 0), 2, 2)
+            .coverRectangle(new TestWorldLocation(0, 0), 2, 2)
             .build();
       assertThat(water.getCoverage(), hasSize(4));
       
@@ -111,21 +112,21 @@ public class WaterBuilderTest {
    @Test
    public void shouldPopulateShallowSurroundedDepths() {
       systemUnderTest
-            .coverRectangle(new WorldLocation(0, 0), 3, 3)
+            .coverRectangle(new TestWorldLocation(0, 0), 3, 3)
             .build();
       assertThat(water.getCoverage(), hasSize(9));
       
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(1, 1)).getDepth().getDepth(), equalTo(1));
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(1, 1)).getDepth().getDepth(), equalTo(1));
    }
    
    @Test
    public void shouldPopulateDeepestDepths() {
       systemUnderTest
-            .coverRectangle(new WorldLocation(0, 0), 5, 5)
+            .coverRectangle(new TestWorldLocation(0, 0), 5, 5)
             .build();
       assertThat(water.getCoverage(), hasSize(25));
       
-      assertThat(water.getLocationPropertiesFor(new WorldLocation(2, 2)).getDepth().getDepth(), equalTo(2));
+      assertThat(water.getLocationPropertiesFor(new TestWorldLocation(2, 2)).getDepth().getDepth(), equalTo(2));
    }
    
 }

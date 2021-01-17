@@ -45,7 +45,7 @@ public class ActionProcessor {
    }
    
    private GameAction calculateActionForMovement(Dinosaur dinosaur, Movement movement) {
-      WorldLocation newLocation = gameState.expectWorld().locationForMovement(dinosaur.expectLocation(), movement);
+      WorldLocation newLocation = movement.move(dinosaur.expectLocation(), gameState.expectWorld());
       Collection<Collision> collisions = collisionDetection.calculateCollisions(dinosaur, newLocation);
       MoveAction moveAction = new MoveAction(gameState.expectWorld(), dinosaur, movement);
       if (collisions.isEmpty()) {

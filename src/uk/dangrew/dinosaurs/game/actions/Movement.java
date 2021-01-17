@@ -1,7 +1,9 @@
+
 package uk.dangrew.dinosaurs.game.actions;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
+import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 
 /**
@@ -10,25 +12,25 @@ import uk.dangrew.dinosaurs.game.world.WorldLocation;
 public enum Movement {
    
    UP(
-         l -> new WorldLocation(l.getHorizontal(), l.getVertical() - 1)
+         (l, w) -> l.translate(0, -1, w)
    ),
    RIGHT(
-         l -> new WorldLocation(l.getHorizontal() + 1, l.getVertical())
+         (l, w) -> l.translate(1, 0, w)
    ),
    DOWN(
-         l -> new WorldLocation(l.getHorizontal(), l.getVertical() + 1)
+         (l, w) -> l.translate(0, 1, w)
    ),
    LEFT(
-         l -> new WorldLocation(l.getHorizontal() - 1, l.getVertical())
+         (l, w) -> l.translate(-1, 0, w)
    );
    
-   private final Function<WorldLocation, WorldLocation> rawMoverFunction;
+   private final BiFunction<WorldLocation, World, WorldLocation> rawMoverFunction;
    
-   private Movement(Function<WorldLocation, WorldLocation> rawMoverFunction){
+   private Movement(BiFunction<WorldLocation, World, WorldLocation> rawMoverFunction) {
       this.rawMoverFunction = rawMoverFunction;
    }
    
-   public WorldLocation rawMove(WorldLocation worldLocation){
-      return rawMoverFunction.apply(worldLocation);
+   public WorldLocation move(WorldLocation worldLocation, World world) {
+      return rawMoverFunction.apply(worldLocation, world);
    }
 }

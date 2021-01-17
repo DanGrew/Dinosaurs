@@ -14,7 +14,7 @@ import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.model.greenery.Tree;
 import uk.dangrew.dinosaurs.game.model.water.Water;
 import uk.dangrew.dinosaurs.game.model.water.WaterLocationProperties;
-import uk.dangrew.dinosaurs.game.world.WorldLocation;
+import uk.dangrew.dinosaurs.game.world.TestWorldLocation;
 
 public class CollisionDetectionTest {
    
@@ -26,7 +26,7 @@ public class CollisionDetectionTest {
    @BeforeEach
    public void initialiseSystemUnderTest() {
       dinosaur = new Dinosaur("Dino");
-      dinosaur.getWorldLocation().set(new WorldLocation(4, 5));
+      dinosaur.getWorldLocation().set(new TestWorldLocation(4, 5));
       
       assetManager = new AssetManager();
       systemUnderTest = new CollisionDetection(assetManager);
@@ -35,30 +35,30 @@ public class CollisionDetectionTest {
    @Test
    public void shouldCalculateWaterCollisions() {
       Water water = assetManager.getWaterStore().createConcept("Water");
-      water.cover(new WorldLocation(5, 5), new WaterLocationProperties(3, null));
+      water.cover(new TestWorldLocation(5, 5), new WaterLocationProperties(3, null));
       
-      assertThat(systemUnderTest.calculateCollisions(dinosaur, new WorldLocation(4, 6)), empty());
-      assertThat(systemUnderTest.calculateCollisions(dinosaur, new WorldLocation(5, 5)), not(empty()));
+      assertThat(systemUnderTest.calculateCollisions(dinosaur, new TestWorldLocation(4, 6)), empty());
+      assertThat(systemUnderTest.calculateCollisions(dinosaur, new TestWorldLocation(5, 5)), not(empty()));
    }
 
    @Test
    public void shouldCalculateTreeCollisions() {
       Tree concept = assetManager.getTreeStore().createConcept("Tree");
-      concept.setWorldLocation(new WorldLocation(5, 5));
+      concept.setWorldLocation(new TestWorldLocation(5, 5));
 
-      assertThat(systemUnderTest.calculateCollisions(dinosaur, new WorldLocation(4, 6)), empty());
-      assertThat(systemUnderTest.calculateCollisions(dinosaur, new WorldLocation(5, 5)), not(empty()));
+      assertThat(systemUnderTest.calculateCollisions(dinosaur, new TestWorldLocation(4, 6)), empty());
+      assertThat(systemUnderTest.calculateCollisions(dinosaur, new TestWorldLocation(5, 5)), not(empty()));
    }
    
    @Test
    public void shouldHandleMultipleCollisions() {
       Water water = assetManager.getWaterStore().createConcept("Water");
-      water.cover(new WorldLocation(5, 5), new WaterLocationProperties(3, null));
+      water.cover(new TestWorldLocation(5, 5), new WaterLocationProperties(3, null));
 
       Tree concept = assetManager.getTreeStore().createConcept("Tree");
-      concept.setWorldLocation(new WorldLocation(5, 5));
+      concept.setWorldLocation(new TestWorldLocation(5, 5));
 
-      assertThat(systemUnderTest.calculateCollisions(dinosaur, new WorldLocation(4, 6)), empty());
-      assertThat(systemUnderTest.calculateCollisions(dinosaur, new WorldLocation(5, 5)), hasSize(2));
+      assertThat(systemUnderTest.calculateCollisions(dinosaur, new TestWorldLocation(4, 6)), empty());
+      assertThat(systemUnderTest.calculateCollisions(dinosaur, new TestWorldLocation(5, 5)), hasSize(2));
    }
 }

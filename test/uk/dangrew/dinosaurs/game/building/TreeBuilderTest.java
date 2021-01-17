@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import uk.dangrew.dinosaurs.game.storage.TreeStore;
+import uk.dangrew.dinosaurs.game.world.TestWorldLocation;
 import uk.dangrew.dinosaurs.game.world.World;
-import uk.dangrew.dinosaurs.game.world.WorldLocation;
 
 public class TreeBuilderTest {
    
@@ -27,21 +27,21 @@ public class TreeBuilderTest {
    
    @Test
    public void shouldCreateTreesInStraightLine() {
-      systemUnderTest.straightLine(new WorldLocation(0, 0), 1, 2, 3);
+      systemUnderTest.straightLine(new TestWorldLocation(0, 0), 1, 2, 3);
       
       assertThat(treeStore.objectList(), hasSize(3));
-      assertThat(treeStore.objectList().get(0).getWorldLocation(), equalTo(new WorldLocation(0, 0)));
-      assertThat(treeStore.objectList().get(1).getWorldLocation(), equalTo(new WorldLocation(1, 2)));
-      assertThat(treeStore.objectList().get(2).getWorldLocation(), equalTo(new WorldLocation(2, 4)));
+      assertThat(treeStore.objectList().get(0).getWorldLocation(), equalTo(new TestWorldLocation(0, 0)));
+      assertThat(treeStore.objectList().get(1).getWorldLocation(), equalTo(new TestWorldLocation(1, 2)));
+      assertThat(treeStore.objectList().get(2).getWorldLocation(), equalTo(new TestWorldLocation(2, 4)));
    }
    
    @Test
    public void shouldWrapAroundWorld() {
-      systemUnderTest.straightLine(new WorldLocation(8, 9), 2, 3, 3);
+      systemUnderTest.straightLine(new TestWorldLocation(8, 9), 2, 3, 3);
 
       assertThat(treeStore.objectList(), hasSize(3));
-      assertThat(treeStore.objectList().get(0).getWorldLocation(), equalTo(new WorldLocation(8, 9)));
-      assertThat(treeStore.objectList().get(1).getWorldLocation(), equalTo(new WorldLocation(0, 2)));
-      assertThat(treeStore.objectList().get(2).getWorldLocation(), equalTo(new WorldLocation(2, 5)));
+      assertThat(treeStore.objectList().get(0).getWorldLocation(), equalTo(new TestWorldLocation(8, 9)));
+      assertThat(treeStore.objectList().get(1).getWorldLocation(), equalTo(new TestWorldLocation(0, 2)));
+      assertThat(treeStore.objectList().get(2).getWorldLocation(), equalTo(new TestWorldLocation(2, 5)));
    }
 }

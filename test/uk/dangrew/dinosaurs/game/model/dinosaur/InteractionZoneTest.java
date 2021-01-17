@@ -8,6 +8,7 @@ import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import uk.dangrew.dinosaurs.game.world.TestWorldLocation;
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 
@@ -24,7 +25,7 @@ public class InteractionZoneTest {
       dinosaur = new Dinosaur("Dino");
       systemUnderTest = new InteractionZone(dinosaur, 2);
       
-      dinosaur.getWorldLocation().set(new WorldLocation(3, 4));
+      dinosaur.getWorldLocation().set(new TestWorldLocation(3, 4));
    }
    
    @Test
@@ -33,7 +34,7 @@ public class InteractionZoneTest {
       assertThat(interactionZone.size(), equalTo(25));
       for(int i = 0; i < 5; i++) {
          for(int j = 0; j < 5; j++) {
-            assertThat(interactionZone.contains(new WorldLocation(i + 1, j + 2)), equalTo(true));
+            assertThat(interactionZone.contains(new TestWorldLocation(i + 1, j + 2)), equalTo(true));
          }
       }
    }

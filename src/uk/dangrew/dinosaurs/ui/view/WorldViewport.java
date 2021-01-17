@@ -53,12 +53,9 @@ public class WorldViewport {
       for (int horizontal = 0; horizontal < NUMBER_OF_CELLS_IN_VIEW; horizontal++) {
          for (int vertical = 0; vertical < NUMBER_OF_CELLS_IN_VIEW; vertical++) {
             int candidateHorizontal = topLeft.get().getHorizontal() + horizontal;
-            candidateHorizontal %= currentWorld.getHorizontalCellCount();
-            
             int candidateVertical = topLeft.get().getVertical() + vertical;
-            candidateVertical %= currentWorld.getVerticalCellCount();
             
-            viewableLocations.add(new WorldLocation(candidateHorizontal, candidateVertical));
+            viewableLocations.add(new WorldLocation(candidateHorizontal, candidateVertical, currentWorld));
          }
       }
       return viewableLocations;
@@ -98,14 +95,12 @@ public class WorldViewport {
    
    private void resetWorld(World world) {
       this.world.set(world);
-      this.topLeft.set(new WorldLocation(0, 0));
+      this.topLeft.set(new WorldLocation(0, 0, world));
    }
    
    private void updateLocation(int horizontalAdjustment, int verticalAdjustment) {
       World currentWorld = gameState.expectWorld();
       WorldLocation worldLocation = topLeft.get();
-      int horizontal = Math.floorMod(worldLocation.getHorizontal() + horizontalAdjustment, currentWorld.getHorizontalCellCount());
-      int vertical = Math.floorMod(worldLocation.getVertical() + verticalAdjustment, currentWorld.getVerticalCellCount());
-      topLeft.set(new WorldLocation(horizontal, vertical));
+      topLeft.set(worldLocation.translate(horizontalAdjustment, verticalAdjustment, currentWorld));
    }
 }

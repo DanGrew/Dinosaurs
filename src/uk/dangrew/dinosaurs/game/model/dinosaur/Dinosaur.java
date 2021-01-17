@@ -72,11 +72,11 @@ public class Dinosaur implements Asset {
    }
 
    public void moveUp(World world) {
-      move(0, 1, world);
+      move(0, -1, world);
    }
 
    public void moveDown(World world) {
-      move(0, -1, world);
+      move(0, 1, world);
    }
 
    public void moveRight(World world) {
@@ -89,8 +89,6 @@ public class Dinosaur implements Asset {
 
    private void move(int horizontalMovement, int verticalMovement, World world) {
       WorldLocation location = worldLocation.get();
-      int horizontal = Math.floorMod(location.getHorizontal() + horizontalMovement, world.getHorizontalCellCount());
-      int vertical = Math.floorMod(location.getVertical() + verticalMovement, world.getVerticalCellCount());
-      worldLocation.set(new WorldLocation(horizontal, vertical));
+      worldLocation.set(location.translate(horizontalMovement, verticalMovement, world));
    }
 }

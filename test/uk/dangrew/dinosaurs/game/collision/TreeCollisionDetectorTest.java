@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.model.greenery.Tree;
-import uk.dangrew.dinosaurs.game.world.WorldLocation;
+import uk.dangrew.dinosaurs.game.world.TestWorldLocation;
 
 public class TreeCollisionDetectorTest {
    
@@ -19,7 +19,7 @@ public class TreeCollisionDetectorTest {
    @BeforeEach
    public void initialiseSystemUnderTest() {
       tree = new Tree("Tree");
-      tree.setWorldLocation(new WorldLocation(5, 6));
+      tree.setWorldLocation(new TestWorldLocation(5, 6));
       dinosaur = new Dinosaur("Dino");
       systemUnderTest = new TreeCollisionDetector(tree);
    }
