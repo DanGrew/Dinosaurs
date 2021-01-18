@@ -22,7 +22,7 @@ public class TreeBuilderTest {
       world = new World("World");
       world.setDimension(10, 10);
       treeStore = new TreeStore();
-      systemUnderTest = new TreeBuilder(world, treeStore);
+      systemUnderTest = new TreeBuilder(treeStore, world);
    }
    
    @Test

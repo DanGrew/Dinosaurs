@@ -1,6 +1,8 @@
 
 package uk.dangrew.dinosaurs.ui.widgets;
 
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 
 import javafx.scene.Node;
@@ -36,7 +38,13 @@ public class RockWidget extends Pane implements AssetWidget {
    @Override
    public void redraw(){
       getChildren().clear();
-      createWidgetAt(rock.getWorldLocation());
+
+      Collection<WorldLocation> locationsInView = worldViewport.getLocationsInView();
+      rock.getCoverage().stream()
+           .filter(locationsInView::contains)
+           .map(this::createWidgetAt)
+           .filter(Objects::nonNull)
+           .forEach(getChildren()::add);
    }
 
    @Override
@@ -44,21 +52,21 @@ public class RockWidget extends Pane implements AssetWidget {
       getChildren().clear();
    }
 
-   private void createWidgetAt(WorldLocation worldLocation){
+   private Node createWidgetAt(WorldLocation worldLocation){
       Optional<WorldLocation> worldLocationToDisplayAt = worldViewport.translateToScreen(worldLocation);
       if (!worldLocationToDisplayAt.isPresent()) {
-         return;
+         return null;
       }
       int worldCellDimension = gameState.worldCellDimension().get();
 
       int horizontalLocation = worldLocationToDisplayAt.get().getHorizontal() * worldCellDimension;
       int verticalLocation = worldLocationToDisplayAt.get().getVertical() * worldCellDimension;
 
-      ImageView imageView = rock.getTileType().buildImageView();
+      ImageView imageView = rock.getLocationPropertiesFor(worldLocation).getTileType().buildImageView();
       imageView.setFitWidth(worldCellDimension * WIDGET_SCALE_FACTOR);
       imageView.setFitHeight(worldCellDimension * WIDGET_SCALE_FACTOR);
       imageView.setX(horizontalLocation);
       imageView.setY(verticalLocation);
-      getChildren().add(imageView);
+      return imageView;
    }
 }

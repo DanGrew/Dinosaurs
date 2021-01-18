@@ -1,5 +1,9 @@
 package uk.dangrew.dinosaurs.game.model.rubble;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
 import uk.dangrew.dinosaurs.game.collision.NoCollisions;
 import uk.dangrew.dinosaurs.game.storage.Asset;
@@ -10,10 +14,8 @@ import uk.dangrew.kode.concept.Properties;
 public class Rock implements Asset {
    
    private final Properties properties;
+   private final Map<WorldLocation, RockLocationProperties> rockLocationProperties;
    private final CollisionDetector collisionDetector;
-   
-   private WorldLocation worldLocation;
-   private RockTileType rockTileType;
    
    public Rock(String name){
       this(name, name);
@@ -25,9 +27,8 @@ public class Rock implements Asset {
    
    Rock(Properties properties){
       this.properties = properties;
+      this.rockLocationProperties = new HashMap<>();
       this.collisionDetector = new NoCollisions();
-      this.rockTileType = RockTileType.ROCK;
-      this.worldLocation = WorldLocation.defaultLocation();
    }
 
    @Override
@@ -45,19 +46,25 @@ public class Rock implements Asset {
       return collisionDetector;
    }
 
-   public RockTileType getTileType() {
-      return rockTileType;
+   public Collection<WorldLocation> getCoverage() {
+      return rockLocationProperties.keySet();
    }
 
-   public void setRockTileType(RockTileType rockTileType) {
-      this.rockTileType = rockTileType;
+   public void cover(WorldLocation worldLocation){
+      cover(worldLocation, new RockLocationProperties());
    }
 
-   public WorldLocation getWorldLocation() {
-      return worldLocation;
+   public void cover(WorldLocation worldLocation, RockLocationProperties locationProperties){
+      rockLocationProperties.put(worldLocation, locationProperties);
    }
 
-   public void setWorldLocation(WorldLocation worldLocation) {
-      this.worldLocation = worldLocation;
+   public void remove(WorldLocation worldLocation){
+      rockLocationProperties.remove(worldLocation);
    }
+
+
+   public RockLocationProperties getLocationPropertiesFor(WorldLocation worldLocation){
+      return rockLocationProperties.get(worldLocation);
+   }
+
 }

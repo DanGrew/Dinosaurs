@@ -13,7 +13,7 @@ public class TreeBuilder {
    private final World world;
    private final TreeStore treeStore;
    
-   public TreeBuilder(World world, TreeStore treeStore){
+   public TreeBuilder(TreeStore treeStore, World world){
       this.world = world;
       this.treeStore = treeStore;
    }

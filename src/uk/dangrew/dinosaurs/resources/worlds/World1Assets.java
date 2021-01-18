@@ -1,28 +1,13 @@
 
 package uk.dangrew.dinosaurs.resources.worlds;
 
-import static java.util.Arrays.asList;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.GRASS_BOTTOM_LEFT_CORNER;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.GRASS_BOTTOM_RIGHT_CORNER;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.GRASS_TOP_RIGHT_CORNER;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.HORIZONTAL_GRASS_TOP;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.SURROUNDED;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.VERTICAL_GRASS_LEFT;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.VERTICAL_GRASS_RIGHT;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.WATER_BOTTOM_LEFT_CORNER;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.WATER_BOTTOM_RIGHT_CORNER;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.WATER_TOP_LEFT_CORNER;
-import static uk.dangrew.dinosaurs.game.model.water.WaterTileType.WATER_TOP_RIGHT_CORNER;
-
+import uk.dangrew.dinosaurs.game.building.RockBuilder;
 import uk.dangrew.dinosaurs.game.building.TreeBuilder;
 import uk.dangrew.dinosaurs.game.building.WaterBuilder;
 import uk.dangrew.dinosaurs.game.mechanism.AssetManager;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
-import uk.dangrew.dinosaurs.game.model.greenery.Tree;
 import uk.dangrew.dinosaurs.game.model.rubble.Rock;
-import uk.dangrew.dinosaurs.game.model.rubble.RockTileType;
 import uk.dangrew.dinosaurs.game.model.water.Water;
-import uk.dangrew.dinosaurs.game.model.water.WaterLocationProperties;
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 
@@ -39,111 +24,40 @@ public class World1Assets {
    
    public void build() {
       this.world = assetManager.getWorldStore().createConcept("Home World");
-      this.world.setDimension(30, 30);
+      this.world.setDimension(20, 20);
       
-      Water water = assetManager.getWaterStore().createConcept("My First Pond");
-      asList(
-            new WorldLocation(16, 5, world),
-            new WorldLocation(16, 6, world),
-            new WorldLocation(17, 5, world),
-            new WorldLocation(17, 6, world),
-            new WorldLocation(17, 7, world),
-            new WorldLocation(17, 8, world),
-            new WorldLocation(18, 7, world),
-            new WorldLocation(18, 8, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(1, SURROUNDED)));
-      asList(
-            new WorldLocation(16, 4, world),
-            new WorldLocation(17, 4, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, HORIZONTAL_GRASS_TOP)));
-      asList(
-            new WorldLocation(16, 8, world),
-            new WorldLocation(15, 5, world),
-            new WorldLocation(15, 6, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, VERTICAL_GRASS_LEFT)));
-      asList(
-            new WorldLocation(19, 7, world),
-            new WorldLocation(19, 8, world),
-            new WorldLocation(18, 5, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, VERTICAL_GRASS_RIGHT)));
-      asList(
-            new WorldLocation(15, 4, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_BOTTOM_RIGHT_CORNER)));
-      asList(
-            new WorldLocation(19, 6, world),
-            new WorldLocation(18, 4, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_BOTTOM_LEFT_CORNER)));
-      asList(
-            new WorldLocation(18, 10, world),
-            new WorldLocation(19, 9, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_TOP_LEFT_CORNER)));
-      asList(
-            new WorldLocation(16, 9, world),
-            new WorldLocation(17, 10, world),
-            new WorldLocation(15, 7, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, WATER_TOP_RIGHT_CORNER)));
-      asList(
-            new WorldLocation(18, 6, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_TOP_RIGHT_CORNER)));
-      asList(
-            new WorldLocation(18, 9, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_BOTTOM_RIGHT_CORNER)));
-      asList(
-            new WorldLocation(16, 7, world),
-            new WorldLocation(17, 9, world))
-                  .forEach(location -> water.cover(location, new WaterLocationProperties(0, GRASS_BOTTOM_LEFT_CORNER)));
-      
-      Water generated = assetManager.getWaterStore().createConcept("Generated");
-      new WaterBuilder(generated, world)
-            .coverRectangle(new WorldLocation(2, 2, world), 6, 7)
-            .coverRectangle(new WorldLocation(7, 4, world), 3, 3)
-            .coverRectangle(new WorldLocation(7, 8, world), 3, 3)
-            .append(new WorldLocation(8, 3, world))
-            .subtract(new WorldLocation(2, 8, world))
+      Water large_middle_lake = assetManager.getWaterStore().createConcept("Large Middle Lake");
+      new WaterBuilder(large_middle_lake, world)
+            .coverRectangle(new WorldLocation(5, 6, world), 6, 8)
+            .coverRectangle(new WorldLocation(3, 5, world), 3, 3)
+            .coverRectangle(new WorldLocation(3, 12, world), 3, 3)
+            .coverRectangle(new WorldLocation(4, 9, world), 2, 2)
             .build();
-
-      Rock r1 = assetManager.getRockStore().createConcept("1");
-      r1.setWorldLocation(new WorldLocation(3, 18, world));
-      r1.setRockTileType(RockTileType.ROCK);
-
-      Rock r2 = assetManager.getRockStore().createConcept("2");
-      r2.setWorldLocation(new WorldLocation(4, 18, world));
-      r2.setRockTileType(RockTileType.ROCK);
-
-      Rock r3 = assetManager.getRockStore().createConcept("3");
-      r3.setWorldLocation(new WorldLocation(5, 18, world));
-      r3.setRockTileType(RockTileType.ROCK);
       
-      Rock r6 = assetManager.getRockStore().createConcept("6");
-      r6.setWorldLocation(new WorldLocation(5, 15, world));
-      r6.setRockTileType(RockTileType.ROCK_BOTTOM_RIGHT_CORNER);
-
-      Rock r7 = assetManager.getRockStore().createConcept("7");
-      r7.setWorldLocation(new WorldLocation(6, 15, world));
-      r7.setRockTileType(RockTileType.ROCK_BOTTOM_LEFT_CORNER);
-
-      Rock r4 = assetManager.getRockStore().createConcept("4");
-      r4.setWorldLocation(new WorldLocation(5, 16, world));
-      r4.setRockTileType(RockTileType.ROCK_TOP_RIGHT_CORNER);
-
-      Rock r5 = assetManager.getRockStore().createConcept("5");
-      r5.setWorldLocation(new WorldLocation(6, 16, world));
-      r5.setRockTileType(RockTileType.ROCK_TOP_LEFT_CORNER);
-
-      Rock r8 = assetManager.getRockStore().createConcept("8");
-      r8.setWorldLocation(new WorldLocation(8, 15, world));
-      r8.setRockTileType(RockTileType.ROCK_CAVE);
+      Rock test = assetManager.getRockStore().createConcept("Test");
+      new RockBuilder(test, world)
+            .coverTriangle(new WorldLocation(10, 7, world), 3, true, false)
+            .coverTriangle(new WorldLocation(10, 12, world), 3, true, true)
+            .coverRectangle(new WorldLocation(10, 8, world), 4, 4);
+      
       
       this.player = assetManager.getDinosaurStore().createConcept("Steggy");
-      player.getWorldLocation().set(new WorldLocation(10, 10, world));
+      player.getWorldLocation().set(new WorldLocation(0, 0, world));
+      
+      new TreeBuilder(assetManager.getTreeStore(), world)
+            .straightLine(new WorldLocation(14, 18, world), 2, 0, 3)
+            .straightLine(new WorldLocation(13, 19, world), 2, 0, 4)
+            .straightLine(new WorldLocation(14, 0, world), 2, 0, 3)
+            .straightLine(new WorldLocation(13, 1, world), 2, 0, 4)
+            .straightLine(new WorldLocation(14, 2, world), 2, 0, 3)
+            .straightLine(new WorldLocation(13, 3, world), 2, 0, 4)
 
-      Tree tree = assetManager.getTreeStore().createConcept("Tree");
-      tree.setWorldLocation(new WorldLocation(10, 2, world));
-      tree.setHeight(2);
+            .straightLine(new WorldLocation(3, 5, world), 1, 0, 3)
+            .straightLine(new WorldLocation(3, 5, world), 0, 1, 3)
 
-      new TreeBuilder(world, assetManager.getTreeStore())
-            .straightLine(new WorldLocation(2, 2, world), 0, 1, 5)
-            .straightLine(new WorldLocation(7, 2, world), 1, 1, 3);
+            .straightLine(new WorldLocation(3, 12, world), 0, 1, 3)
+            .straightLine(new WorldLocation(3, 14, world), 1, 0, 3)
+      ;
    }
    
    public Dinosaur getPlayer() {

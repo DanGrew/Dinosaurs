@@ -3,11 +3,9 @@ Hover labels for assets
 Layers - collisions, edibles, drinkables, height map
 Health, hunger, thirst - actions to populate
 Bushes
-rocks, caves - finish and commit, builder
 Rocks with height and collisions
 Caves and hiding
 Commonality for widgets
-Rocks into a group like water?
 
 MEDIUM
 Fix publishing in gradle scripts
