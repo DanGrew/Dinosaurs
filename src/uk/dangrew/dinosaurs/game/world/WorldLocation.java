@@ -47,10 +47,10 @@ public class WorldLocation {
       return Objects.hash(getHorizontal(), getVertical());
    }
 
-   public WorldLocation difference(WorldLocation worldLocation, int horizontalCellCount, int verticalCellCount) {
-      int horizontal = Math.floorMod(getHorizontal() - worldLocation.getHorizontal(), horizontalCellCount);
-      int vertical = Math.floorMod(getVertical() - worldLocation.getVertical(), verticalCellCount);
-      return new WorldLocation(horizontal, vertical);
+   public WorldLocation difference(WorldLocation worldLocation, World world) {
+      int horizontal = getHorizontal() - worldLocation.getHorizontal();
+      int vertical = getVertical() - worldLocation.getVertical();
+      return new WorldLocation(horizontal, vertical, world);
    }
 
    public WorldLocation translate(int horizontalAdjustment, int verticalAdjustment, World world) {
@@ -67,4 +67,6 @@ public class WorldLocation {
    public static WorldLocation defaultLocation() {
       return new WorldLocation(0, 0);
    }
+   
+   
 }

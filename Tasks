@@ -1,21 +1,23 @@
 HIGH
-Hover labels for assets
-Layers - collisions, edibles, drinkables, height map
+Carnivore - roam
+Carnivore - chase
 Health, hunger, thirst - actions to populate
-Bushes
-Rocks with height and collisions
-Caves and hiding
-Commonality for widgets
 
 MEDIUM
-Fix publishing in gradle scripts
+Rocks with height and collisions
+Bushes
+Layers - collisions, edibles, drinkables, height map
+Caves and hiding
+Commonality for widgets
+Hover labels for assets
 Get authentication working for GitHUb (email)
-Javafx modules on run configuration
 Remove duplicate from concept interface
 
 LOW
+Javafx modules on run configuration
 Get tests running
 Commit uncommitted music-tagger changes
 Nuts working on windows - add script for running
+Fix publishing in gradle scripts
 
 

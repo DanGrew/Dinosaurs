@@ -38,11 +38,11 @@ public class WorldViewport {
       return topLeft;
    }
    
-   public WorldLocation topLeft(){
+   public WorldLocation topLeft() {
       return topLeftProperty().get();
    }
    
-   public int numberOfCellsInViewDimension(){
+   public int numberOfCellsInViewDimension() {
       return numberOfCellsInViewDimension.get();
    }
    
@@ -67,10 +67,9 @@ public class WorldViewport {
    
    public Optional<WorldLocation> translateToScreen(WorldLocation worldLocation) {
       World currentWorld = gameState.expectWorld();
-
+      
       if (withinView(worldLocation)) {
-         WorldLocation newLocation = worldLocation.difference(
-               topLeftProperty().get(), currentWorld.getHorizontalCellCount(), currentWorld.getVerticalCellCount());
+         WorldLocation newLocation = worldLocation.difference(topLeftProperty().get(), currentWorld);
          return Optional.of(newLocation);
       } else {
          return Optional.empty();
