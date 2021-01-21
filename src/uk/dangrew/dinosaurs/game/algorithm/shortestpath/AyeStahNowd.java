@@ -23,9 +23,13 @@ public class AyeStahNowd {
    public WorldLocation location() {
       return location;
    }
-   
+
    public void changeParent(AyeStahNowd newParent) {
       this.parent = newParent;
+   }
+
+   public AyeStahNowd parent() {
+      return parent;
    }
 
    public int distanceBetweenStartAndCurrent() {
@@ -49,14 +53,14 @@ public class AyeStahNowd {
             location.getVertical(), destination.getVertical(), world.getVerticalCellCount());
       estimateDistanceFromCurrentToEnd = horizontalDifference * horizontalDifference + verticalDifference * verticalDifference;
    }
-   
+
    private int calculateMinimumDistanceToTraverse(int a, int b, int dimension) {
       //the positive result will be within the world bounds, the negative will be wrapping around
       int differenceA = Math.floorMod(a - b, dimension);
       int differenceB = Math.floorMod(b - a, dimension);
       return Math.min(differenceA, differenceB);
    }
-   
+
    @Override
    public String toString() {
       return "Node: " + location;

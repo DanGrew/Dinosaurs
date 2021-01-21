@@ -2,11 +2,13 @@ package uk.dangrew.dinosaurs.game.building;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import uk.dangrew.dinosaurs.game.ai.RoamingBehaviour;
+import uk.dangrew.dinosaurs.game.collision.CollisionDetection;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.storage.DinosaurStore;
 import uk.dangrew.dinosaurs.game.world.TestWorldLocation;
@@ -22,7 +24,7 @@ public class DinosaurBuilderTest {
    public void initialiseSystemUnderTest() {
       world = new World("World");
       dinosaurStore = new DinosaurStore();
-      systemUnderTest = new DinosaurBuilder(dinosaurStore, world);
+      systemUnderTest = new DinosaurBuilder(dinosaurStore, world, mock(CollisionDetection.class));
    }
    
    @Test

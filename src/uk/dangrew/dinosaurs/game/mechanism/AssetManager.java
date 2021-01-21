@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 
 import java.util.Collection;
 
+import uk.dangrew.dinosaurs.game.collision.CollisionDetection;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.storage.Asset;
 import uk.dangrew.dinosaurs.game.storage.AssetStore;
@@ -25,6 +26,7 @@ public class AssetManager {
    private final WaterStore waterStore;
    private final TreeStore treeStore;
    private final RockStore rockStore;
+   private final CollisionDetection collisionDetection;
    
    private final World1Assets world1Assets;
    
@@ -34,6 +36,7 @@ public class AssetManager {
       this.waterStore = new WaterStore();
       this.treeStore = new TreeStore();
       this.rockStore = new RockStore();
+      this.collisionDetection = new CollisionDetection(getCollidableAssetStores());
       this.world1Assets = new World1Assets(this);
    }
    
@@ -67,6 +70,10 @@ public class AssetManager {
 
    public RockStore getRockStore() {
       return rockStore;
+   }
+
+   public CollisionDetection getCollisionDetection() {
+      return collisionDetection;
    }
 
    public Collection<AssetStore<? extends Asset, ?>> getCollidableAssetStores(){

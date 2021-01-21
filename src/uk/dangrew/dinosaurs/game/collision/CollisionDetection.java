@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import uk.dangrew.dinosaurs.game.mechanism.AssetManager;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.storage.Asset;
 import uk.dangrew.dinosaurs.game.storage.AssetStore;
@@ -17,14 +16,14 @@ import uk.dangrew.dinosaurs.game.world.WorldLocation;
  */
 public class CollisionDetection {
    
-   private final AssetManager assetManager;
+   private final Collection<AssetStore<?, ?>> assetStoresProvidingCollidables;
    
-   public CollisionDetection(AssetManager assetManager) {
-      this.assetManager = assetManager;
+   public CollisionDetection(Collection<AssetStore<? extends Asset, ?>> assetStoresProvidingCollidables) {
+      this.assetStoresProvidingCollidables = assetStoresProvidingCollidables;
    }
    
    public Collection<Collision> calculateCollisions(Dinosaur dinosaur, WorldLocation newLocation) {
-      return assetManager.getCollidableAssetStores().stream()
+      return assetStoresProvidingCollidables.stream()
             .map(AssetStore::objectList)
             .flatMap(List::stream)
             .map(Asset::getCollisionDetector)

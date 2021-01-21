@@ -1,14 +1,15 @@
 
 package uk.dangrew.dinosaurs.game.algorithm.shortestpath;
 
+import static java.util.Collections.unmodifiableList;
 import static java.util.Comparator.comparing;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
@@ -21,35 +22,28 @@ public class AyeStah {
    private final World world;
    
    private final Set<AyeStahNowd> nodesToExploreNext;
-   private final List<AyeStahNowd> solutionPath;
+   private final List<AyeStahNowd> searchedNodes;
    
    public AyeStah(World world) {
       this.world = world;
       this.nodesToExploreNext = new LinkedHashSet<>();
-      this.solutionPath = new ArrayList<>();
+      this.searchedNodes = new ArrayList<>();
    }
    
    public List<WorldLocation> search(SearchSession searchSession) throws AyeStahException {
       nodesToExploreNext.clear();
-      solutionPath.clear();
+      searchedNodes.clear();
       
-      iterate(new AyeStahNowd(searchSession.origin()), searchSession);
-
-      solutionPath.stream()
-            .map(AyeStahNowd::location)
-            .forEach(System.out::println);
-      
-      return solutionPath.stream()
-            .map(AyeStahNowd::location)
-            .collect(Collectors.toUnmodifiableList());
+      AyeStahNowd lastNode = iterate(new AyeStahNowd(searchSession.origin()), searchSession);
+      return unmodifiableList(extractSolution(lastNode));
    }
    
-   private void iterate(AyeStahNowd current, SearchSession searchSession) throws AyeStahException {
-      solutionPath.add(current);
+   private AyeStahNowd iterate(AyeStahNowd current, SearchSession searchSession) throws AyeStahException {
+      searchedNodes.add(current);
       
       if (current.location().equals(searchSession.destination())) {
          //finished!
-         return;
+         return current;
       }
       
       //add search options for up, down, left, right
@@ -61,16 +55,22 @@ public class AyeStah {
       Optional<AyeStahNowd> nodeToExploreNextResult = nodesToExploreNext.stream()
             .sorted(comparing(AyeStahNowd::estimateDistanceFromCurrentToEnd))
             .findFirst();
-      if ( !nodeToExploreNextResult.isPresent()){
+      if (!nodeToExploreNextResult.isPresent()) {
          throw new AyeStahException("No nodes left to search. Path cannot be found.");
       }
       AyeStahNowd nextNodeToExplore = nodeToExploreNextResult.get();
       nodesToExploreNext.remove(nextNodeToExplore);
-      iterate(nextNodeToExplore, searchSession);
+      
+      return iterate(nextNodeToExplore, searchSession);
    }
    
    private void processNode(AyeStahNowd current, SearchSession searchSession, int horizontalChange, int verticalChange) {
       WorldLocation locationToMoveTo = current.location().translate(horizontalChange, verticalChange, world);
+      
+      boolean alreadyVisited = searchedNodes.stream().map(AyeStahNowd::location).anyMatch(l -> l.equals(locationToMoveTo));
+      if (alreadyVisited) {
+         return;
+      }
       
       //construct node for new search location
       AyeStahNowd node = new AyeStahNowd(locationToMoveTo);
@@ -97,6 +97,18 @@ public class AyeStah {
       } else {
          nodesToExploreNext.add(node);
       }
+   }
+   
+   private List<WorldLocation> extractSolution(AyeStahNowd lastNode) {
+      List<WorldLocation> solutionPath = new ArrayList<>();
+      while (lastNode != null) {
+         solutionPath.add(lastNode.location());
+         lastNode = lastNode.parent();
+      }
+      Collections.reverse(solutionPath);
+      solutionPath.forEach(System.out::println);
+      
+      return solutionPath;
    }
    
 }

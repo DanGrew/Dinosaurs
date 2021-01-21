@@ -26,7 +26,7 @@ public class ActionProcessor {
    private final CollisionDetection collisionDetection;
    
    public ActionProcessor(GameState gameState, AssetManager assetManager) {
-      this(gameState, new CollisionDetection(assetManager));
+      this(gameState, assetManager.getCollisionDetection());
    }
    
    ActionProcessor(GameState gameState, CollisionDetection collisionDetection) {

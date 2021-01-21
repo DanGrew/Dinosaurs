@@ -44,7 +44,7 @@ public class World1Assets {
       this.player = assetManager.getDinosaurStore().createConcept("Steggy");
       player.getWorldLocation().set(new WorldLocation(0, 0, world));
       
-      new DinosaurBuilder(assetManager.getDinosaurStore(), world)
+      new DinosaurBuilder(assetManager.getDinosaurStore(), world, assetManager.getCollisionDetection())
             .buildHerbivoreRoamer("Herby", new WorldLocation(5, 2, world))
             .buildHerbivoreRoamer("BigTooth", new WorldLocation(6, 2, world))
             .buildHerbivoreRoamer("Littling", new WorldLocation(17, 8, world))

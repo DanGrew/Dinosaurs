@@ -29,7 +29,7 @@ public class CollisionDetectionTest {
       dinosaur.getWorldLocation().set(new TestWorldLocation(4, 5));
       
       assetManager = new AssetManager();
-      systemUnderTest = new CollisionDetection(assetManager);
+      systemUnderTest = assetManager.getCollisionDetection();
    }
    
    @Test
