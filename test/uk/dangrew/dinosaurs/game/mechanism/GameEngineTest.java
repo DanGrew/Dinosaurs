@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -16,12 +17,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.dangrew.dinosaurs.game.actions.GameAction;
+import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.ui.configuration.GameState;
 
 @ExtendWith(MockitoExtension.class)
 public class GameEngineTest {
    
-   @Mock private AssetManager assetManager;
+   private AssetManager assetManager;
    @Mock private ActionProcessor actionProcessor;
    private List<GameAction> gameActions;
    
@@ -29,6 +31,7 @@ public class GameEngineTest {
    
    @BeforeEach
    public void initialiseSystemUnderTest() {
+      assetManager = new AssetManager();
       systemUnderTest = new GameEngine(new GameState(), assetManager, actionProcessor);
       
       gameActions = asList(mock(GameAction.class), mock(GameAction.class));
@@ -48,5 +51,14 @@ public class GameEngineTest {
       
       verify(gameAction).performAction();
       assertThat(systemUnderTest.availableActions(), contains(gameActions.get(0), gameActions.get(1)));
+   }
+   
+   @Test
+   public void shouldProcessDinosaurBehaviour() {
+      Dinosaur dinosaur = spy(new Dinosaur("Dino"));
+      assetManager.getDinosaurStore().store(dinosaur);
+      
+      systemUnderTest.executePlayerAction(mock(GameAction.class));
+      verify(dinosaur).behave();
    }
 }

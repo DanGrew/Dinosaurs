@@ -1,10 +1,14 @@
 HIGH
-Carnivore - roam
-Carnivore - chase
+Herbivore - roam collisions
+Herbivore - eat, drink, search for
+Herbivore - behaviour layer - path
+Herbivore - stats and info
 Health, hunger, thirst - actions to populate
+Rocks with height and collisions
 
 MEDIUM
-Rocks with height and collisions
+Carnivore - roam
+Carnivore - chase
 Bushes
 Layers - collisions, edibles, drinkables, height map
 Caves and hiding

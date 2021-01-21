@@ -3,6 +3,7 @@ package uk.dangrew.dinosaurs.game.mechanism;
 
 import static java.util.Collections.singleton;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.lenient;
 
@@ -20,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import uk.dangrew.dinosaurs.game.actions.GameAction;
 import uk.dangrew.dinosaurs.game.actions.MoveAction;
 import uk.dangrew.dinosaurs.game.actions.Movement;
+import uk.dangrew.dinosaurs.game.actions.RestAction;
 import uk.dangrew.dinosaurs.game.actions.UnnavailableAction;
 import uk.dangrew.dinosaurs.game.collision.Collision;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetection;
@@ -55,8 +57,10 @@ public class ActionProcessorTest {
    @Test
    public void shouldProvideMovementForEachDirection() {
       List<GameAction> gameActions = new ArrayList<>(systemUnderTest.calculateAvailableActions());
-      for (int i = 0; i < gameActions.size(); i++) {
-         MoveAction moveAction = (MoveAction) gameActions.get(i);
+      GameAction firstAction = gameActions.get(0);
+      assertThat(firstAction, instanceOf(RestAction.class));
+      for (int i = 0; i < Movement.values().length; i++) {
+         MoveAction moveAction = (MoveAction) gameActions.get(i + 1);
          assertThat(moveAction.movement(), equalTo(Movement.values()[i]));
       }
    }

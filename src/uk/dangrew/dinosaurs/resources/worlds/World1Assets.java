@@ -1,6 +1,7 @@
 
 package uk.dangrew.dinosaurs.resources.worlds;
 
+import uk.dangrew.dinosaurs.game.building.DinosaurBuilder;
 import uk.dangrew.dinosaurs.game.building.RockBuilder;
 import uk.dangrew.dinosaurs.game.building.TreeBuilder;
 import uk.dangrew.dinosaurs.game.building.WaterBuilder;
@@ -40,9 +41,16 @@ public class World1Assets {
             .coverTriangle(new WorldLocation(10, 12, world), 3, true, true)
             .coverRectangle(new WorldLocation(10, 8, world), 4, 4);
       
-      
       this.player = assetManager.getDinosaurStore().createConcept("Steggy");
       player.getWorldLocation().set(new WorldLocation(0, 0, world));
+      
+      new DinosaurBuilder(assetManager.getDinosaurStore(), world)
+            .buildHerbivoreRoamer("Herby", new WorldLocation(5, 2, world))
+            .buildHerbivoreRoamer("BigTooth", new WorldLocation(6, 2, world))
+            .buildHerbivoreRoamer("Littling", new WorldLocation(17, 8, world))
+            .buildHerbivoreRoamer("Deano", new WorldLocation(18, 7, world))
+            .buildHerbivoreRoamer("Balthazah", new WorldLocation(19, 9, world))
+            .buildHerbivoreRoamer("Dave", new WorldLocation(2, 10, world));
       
       new TreeBuilder(assetManager.getTreeStore(), world)
             .straightLine(new WorldLocation(14, 18, world), 2, 0, 3)
@@ -51,13 +59,12 @@ public class World1Assets {
             .straightLine(new WorldLocation(13, 1, world), 2, 0, 4)
             .straightLine(new WorldLocation(14, 2, world), 2, 0, 3)
             .straightLine(new WorldLocation(13, 3, world), 2, 0, 4)
-
+            
             .straightLine(new WorldLocation(3, 5, world), 1, 0, 3)
             .straightLine(new WorldLocation(3, 5, world), 0, 1, 3)
-
+            
             .straightLine(new WorldLocation(3, 12, world), 0, 1, 3)
-            .straightLine(new WorldLocation(3, 14, world), 1, 0, 3)
-      ;
+            .straightLine(new WorldLocation(3, 14, world), 1, 0, 3);
    }
    
    public Dinosaur getPlayer() {

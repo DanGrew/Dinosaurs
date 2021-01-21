@@ -1,8 +1,12 @@
 
 package uk.dangrew.dinosaurs.game.model.dinosaur;
 
+import java.util.Optional;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import uk.dangrew.dinosaurs.game.ai.DinosaurBehaviour;
+import uk.dangrew.dinosaurs.game.ai.ManuallyControlledBehaviour;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
 import uk.dangrew.dinosaurs.game.collision.NoCollisions;
 import uk.dangrew.dinosaurs.game.storage.Asset;
@@ -14,11 +18,12 @@ import uk.dangrew.kode.concept.Properties;
 public class Dinosaur implements Asset {
    
    private final Properties properties;
-   private final int height;
    private final CollisionDetector collisionDetector;
    private final InteractionZone interactionZone;
-   
-   private ObjectProperty<WorldLocation> worldLocation;
+
+   private final int height;
+   private final ObjectProperty<WorldLocation> worldLocation;
+   private final ObjectProperty<DinosaurBehaviour> behaviour;
    
    public Dinosaur(String name) {
       this(name, name);
@@ -34,6 +39,7 @@ public class Dinosaur implements Asset {
       this.height = 1;
       this.interactionZone = new InteractionZone(this, 1);
       this.worldLocation = new SimpleObjectProperty<>();
+      this.behaviour = new SimpleObjectProperty<>(new ManuallyControlledBehaviour());
    }
    
    @Override
@@ -49,6 +55,14 @@ public class Dinosaur implements Asset {
    @Override
    public CollisionDetector getCollisionDetector() {
       return collisionDetector;
+   }
+
+   public ObjectProperty<DinosaurBehaviour> getBehaviour() {
+      return behaviour;
+   }
+
+   public void behave() {
+      Optional.ofNullable(behaviour.get()).ifPresent(DinosaurBehaviour::behave);
    }
 
    public InteractionZone getInteractionZone() {

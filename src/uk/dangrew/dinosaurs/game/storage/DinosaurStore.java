@@ -10,7 +10,7 @@ import uk.dangrew.kode.storage.structure.MappedObservableStoreManagerImpl;
 public class DinosaurStore extends MappedObservableStoreManagerImpl<String, Dinosaur> implements AssetStore<Dinosaur, DinosaurWidget> {
    
    public DinosaurStore() {
-      super(water -> water.properties().id());
+      super(dinosaur -> dinosaur.properties().id());
    }
    
    @Override

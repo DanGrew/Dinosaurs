@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import uk.dangrew.dinosaurs.game.actions.GameAction;
 import uk.dangrew.dinosaurs.game.actions.MoveAction;
 import uk.dangrew.dinosaurs.game.actions.Movement;
+import uk.dangrew.dinosaurs.game.actions.RestAction;
 import uk.dangrew.dinosaurs.game.actions.UnnavailableAction;
 import uk.dangrew.dinosaurs.game.collision.Collision;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetection;
@@ -36,6 +37,7 @@ public class ActionProcessor {
    public Collection<GameAction> calculateAvailableActions() {
       Set<GameAction> possibleActions = new LinkedHashSet<>();
       
+      possibleActions.add(new RestAction());
       for (Movement movement : Movement.values()) {
          GameAction moveAction = calculateActionForMovement(gameState.expectPlayer(), movement);
          possibleActions.add(moveAction);

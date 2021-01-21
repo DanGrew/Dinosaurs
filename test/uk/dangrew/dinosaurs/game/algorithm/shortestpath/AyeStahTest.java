@@ -80,6 +80,14 @@ public class AyeStahTest {
       assertThatPathIsFound(7, 1, 7, 0, 7, 9);
    }
    
+   @Test
+   public void shouldClearStructuresToPerformMultipleSearches() throws AyeStahException {
+      shouldFindShortestPathInsideBoundsUp();
+      shouldFindShortestPathInsideBoundsDown();
+      shouldFindShortestPathInsideBoundsDiagonal();
+      shouldFindShortestPathOutsideBoundsUp();
+   }
+   
    private SearchSession sessionFor(WorldLocation origin, WorldLocation destination){
       return new SearchSession(origin, destination);
    }

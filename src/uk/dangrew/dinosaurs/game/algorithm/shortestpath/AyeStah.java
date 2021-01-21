@@ -30,8 +30,11 @@ public class AyeStah {
    }
    
    public List<WorldLocation> search(SearchSession searchSession) throws AyeStahException {
-      iterate(new AyeStahNowd(searchSession.origin()), searchSession);
+      nodesToExploreNext.clear();
+      solutionPath.clear();
       
+      iterate(new AyeStahNowd(searchSession.origin()), searchSession);
+
       solutionPath.stream()
             .map(AyeStahNowd::location)
             .forEach(System.out::println);
@@ -55,13 +58,15 @@ public class AyeStah {
       processNode(current, searchSession, -1, 0);
       processNode(current, searchSession, 1, 0);
       
-      Optional<AyeStahNowd> nodeToExploreNext = nodesToExploreNext.stream()
+      Optional<AyeStahNowd> nodeToExploreNextResult = nodesToExploreNext.stream()
             .sorted(comparing(AyeStahNowd::estimateDistanceFromCurrentToEnd))
             .findFirst();
-      if ( !nodeToExploreNext.isPresent()){
+      if ( !nodeToExploreNextResult.isPresent()){
          throw new AyeStahException("No nodes left to search. Path cannot be found.");
       }
-      iterate(nodeToExploreNext.get(), searchSession);
+      AyeStahNowd nextNodeToExplore = nodeToExploreNextResult.get();
+      nodesToExploreNext.remove(nextNodeToExplore);
+      iterate(nextNodeToExplore, searchSession);
    }
    
    private void processNode(AyeStahNowd current, SearchSession searchSession, int horizontalChange, int verticalChange) {
