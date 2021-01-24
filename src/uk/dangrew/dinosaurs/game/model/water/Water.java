@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import uk.dangrew.dinosaurs.game.actions.mechanism.ActionGenerator;
+import uk.dangrew.dinosaurs.game.actions.mechanism.NoActions;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
 import uk.dangrew.dinosaurs.game.collision.WaterCollisionDetector;
 import uk.dangrew.dinosaurs.game.storage.Asset;
@@ -19,7 +21,8 @@ public class Water implements Asset {
    
    private final Properties properties;
    private final Map<WorldLocation, WaterLocationProperties> waterLocationProperties;
-   private final WaterCollisionDetector waterCollisionDetector;
+   private final CollisionDetector collisionDetector;
+   private final ActionGenerator actionGenerator;
    
    public Water(String name) {
       this(name, name);
@@ -32,7 +35,8 @@ public class Water implements Asset {
    Water(Properties properties){
       this.properties = properties;
       this.waterLocationProperties = new LinkedHashMap<>();
-      this.waterCollisionDetector = new WaterCollisionDetector(this);
+      this.collisionDetector = new WaterCollisionDetector(this);
+      this.actionGenerator = new NoActions();
    }
 
    @Override
@@ -47,7 +51,12 @@ public class Water implements Asset {
 
    @Override
    public CollisionDetector getCollisionDetector() {
-      return waterCollisionDetector;
+      return collisionDetector;
+   }
+
+   @Override
+   public ActionGenerator getActionGenerator() {
+      return actionGenerator;
    }
 
    public Collection<WorldLocation> getCoverage() {

@@ -21,7 +21,7 @@ public class WaterDepth {
    }
 
    public boolean dinosaurCanSurvive(Dinosaur dinosaur) {
-      return dinosaur.getHeight() > depth;
+      return dinosaur.height().get() > depth;
    }
 
    @Override

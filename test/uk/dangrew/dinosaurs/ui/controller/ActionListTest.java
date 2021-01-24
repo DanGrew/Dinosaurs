@@ -2,9 +2,7 @@ package uk.dangrew.dinosaurs.ui.controller;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import uk.dangrew.dinosaurs.game.actions.GameAction;
+import uk.dangrew.dinosaurs.game.actions.mechanism.GameAction;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
 import uk.dangrew.kode.javafx.platform.JavaFxThreading;
 

@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import uk.dangrew.dinosaurs.game.ai.RoamingBehaviour;
+import uk.dangrew.dinosaurs.game.behaviour.roaming.RoamingBehaviour;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetection;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.storage.DinosaurStore;

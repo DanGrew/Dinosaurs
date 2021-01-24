@@ -42,4 +42,8 @@ public class InteractionZone {
    public int getRange() {
       return range;
    }
+
+   public boolean contains(WorldLocation worldLocation) {
+      return interactionZone.contains(worldLocation);
+   }
 }

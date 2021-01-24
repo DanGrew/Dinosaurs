@@ -63,6 +63,10 @@ public class WorldLocation {
    public String toString() {
       return String.format("Location: {%d, %d}", getHorizontal(), getVertical());
    }
+   
+   public String wrapedCoordinates(){
+      return String.format("{%d, %d}", getHorizontal(), getVertical());
+   }
 
    public static WorldLocation defaultLocation() {
       return new WorldLocation(0, 0);

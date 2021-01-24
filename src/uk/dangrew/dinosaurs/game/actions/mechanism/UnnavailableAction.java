@@ -1,5 +1,5 @@
 
-package uk.dangrew.dinosaurs.game.actions;
+package uk.dangrew.dinosaurs.game.actions.mechanism;
 
 public class UnnavailableAction implements GameAction {
    

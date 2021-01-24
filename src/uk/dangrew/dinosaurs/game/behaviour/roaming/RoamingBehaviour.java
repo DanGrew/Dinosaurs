@@ -1,5 +1,5 @@
 
-package uk.dangrew.dinosaurs.game.ai;
+package uk.dangrew.dinosaurs.game.behaviour.roaming;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.Random;
 import uk.dangrew.dinosaurs.game.algorithm.shortestpath.AyeStah;
 import uk.dangrew.dinosaurs.game.algorithm.shortestpath.AyeStahException;
 import uk.dangrew.dinosaurs.game.algorithm.shortestpath.SearchSession;
+import uk.dangrew.dinosaurs.game.behaviour.DinosaurBehaviour;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetection;
 import uk.dangrew.dinosaurs.game.collision.WorldTraversalCollisionDetector;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;

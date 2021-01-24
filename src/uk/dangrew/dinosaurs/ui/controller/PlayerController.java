@@ -1,21 +1,14 @@
 package uk.dangrew.dinosaurs.ui.controller;
 
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
-import uk.dangrew.dinosaurs.ui.controls.PanningControls;
-import uk.dangrew.dinosaurs.ui.view.CameraController;
-import uk.dangrew.kode.javafx.style.JavaFxStyle;
 
 /**
  * Ui component providing a controller for the player.
  */
-public class PlayerController extends GridPane {
+public class PlayerController extends BorderPane {
    
-   public PlayerController(GameEngine gameController, CameraController cameraController){
-      JavaFxStyle styling = new JavaFxStyle();
-      styling.configureConstraintsForRowPercentages(this, 20, 80);
-      styling.configureConstraintsForColumnPercentages(this, 100);
-      add(new PanningControls(cameraController), 0, 0);
-      add(new ActionList(gameController), 0, 1);
+   public PlayerController(GameEngine gameController){
+      setCenter(new ActionList(gameController));
    }
 }

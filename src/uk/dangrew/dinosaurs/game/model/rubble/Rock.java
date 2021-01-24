@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import uk.dangrew.dinosaurs.game.actions.mechanism.ActionGenerator;
+import uk.dangrew.dinosaurs.game.actions.mechanism.NoActions;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
 import uk.dangrew.dinosaurs.game.collision.NoCollisions;
 import uk.dangrew.dinosaurs.game.storage.Asset;
@@ -16,6 +18,7 @@ public class Rock implements Asset {
    private final Properties properties;
    private final Map<WorldLocation, RockLocationProperties> rockLocationProperties;
    private final CollisionDetector collisionDetector;
+   private final ActionGenerator actionGenerator;
    
    public Rock(String name){
       this(name, name);
@@ -29,6 +32,7 @@ public class Rock implements Asset {
       this.properties = properties;
       this.rockLocationProperties = new HashMap<>();
       this.collisionDetector = new NoCollisions();
+      this.actionGenerator = new NoActions();
    }
 
    @Override
@@ -44,6 +48,11 @@ public class Rock implements Asset {
    @Override
    public CollisionDetector getCollisionDetector() {
       return collisionDetector;
+   }
+
+   @Override
+   public ActionGenerator getActionGenerator() {
+      return actionGenerator;
    }
 
    public Collection<WorldLocation> getCoverage() {

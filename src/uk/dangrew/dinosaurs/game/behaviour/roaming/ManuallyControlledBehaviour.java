@@ -1,4 +1,6 @@
-package uk.dangrew.dinosaurs.game.ai;
+package uk.dangrew.dinosaurs.game.behaviour.roaming;
+
+import uk.dangrew.dinosaurs.game.behaviour.DinosaurBehaviour;
 
 public class ManuallyControlledBehaviour implements DinosaurBehaviour {
    @Override

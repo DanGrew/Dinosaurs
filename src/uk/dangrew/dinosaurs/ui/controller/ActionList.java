@@ -6,7 +6,7 @@ import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
-import uk.dangrew.dinosaurs.game.actions.GameAction;
+import uk.dangrew.dinosaurs.game.actions.mechanism.GameAction;
 import uk.dangrew.dinosaurs.game.mechanism.GameEngine;
 import uk.dangrew.kode.javafx.style.JavaFxStyle;
 import uk.dangrew.kode.observable.FunctionListChangeListenerImpl;
@@ -24,7 +24,7 @@ public class ActionList extends GridPane {
       this.actionButtons = new HashMap<>();
 
       JavaFxStyle styling = new JavaFxStyle();
-      styling.configureConstraintsForEvenRows(this, 9);
+      styling.configureConstraintsForEvenRows(this, 20);
       styling.configureConstraintsForColumnPercentages(this, 100);
       
       gameEngine.availableActions().addListener(new FunctionListChangeListenerImpl<>(

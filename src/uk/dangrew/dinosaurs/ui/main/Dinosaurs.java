@@ -53,7 +53,7 @@ public class Dinosaurs extends Application {
       GameEngine gameEngine = new GameEngine(gameState);
       GameContent gameContent = new GameContent();
       GraphicalEngine graphicalEngine = new GraphicalEngine(gameContent, gameState, gameEngine.getAssetManager());
-      UiTopLevelPane topLevelPane = new UiTopLevelPane(gameEngine, graphicalEngine.getCameraController(), gameContent);
+      UiTopLevelPane topLevelPane = new UiTopLevelPane(gameState, gameEngine, graphicalEngine.getCameraController(), gameContent);
 
       wrapper.setCenter(topLevelPane);
       stage.show();

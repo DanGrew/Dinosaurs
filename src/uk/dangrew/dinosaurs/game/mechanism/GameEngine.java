@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import uk.dangrew.dinosaurs.game.actions.GameAction;
+import uk.dangrew.dinosaurs.game.actions.mechanism.GameAction;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.kode.observable.PrivatelyModifiableObservableListImpl;

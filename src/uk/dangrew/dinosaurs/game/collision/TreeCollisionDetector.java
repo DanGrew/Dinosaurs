@@ -23,7 +23,7 @@ public class TreeCollisionDetector implements CollisionDetector {
          return Optional.empty();
       }
 
-      if (dinosaur.getHeight() < tree.getHeight()){
+      if (dinosaur.height().get() < tree.getHeight()){
          return Optional.empty();
       } else {
          return Optional.of(new Collision("Too big to move through trees!"));

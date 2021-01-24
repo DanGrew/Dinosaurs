@@ -1,10 +1,12 @@
 HIGH
-Herbivore - roam collisions
 Herbivore - eat, drink, search for
 Herbivore - behaviour layer - path
 Herbivore - stats and info
 Health, hunger, thirst - actions to populate
 Rocks with height and collisions
+Action generator for world - move
+Unavailable action moved into action logic
+Eating from trees taller than the dino
 
 MEDIUM
 Carnivore - roam

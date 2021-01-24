@@ -1,5 +1,6 @@
 package uk.dangrew.dinosaurs.game.storage;
 
+import uk.dangrew.dinosaurs.game.actions.mechanism.ActionGenerator;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
 import uk.dangrew.kode.concept.Concept;
 
@@ -9,4 +10,6 @@ import uk.dangrew.kode.concept.Concept;
 public interface Asset extends Concept {
    
    public CollisionDetector getCollisionDetector();
+   
+   public ActionGenerator getActionGenerator();
 }

@@ -1,6 +1,7 @@
 
 package uk.dangrew.dinosaurs.resources.worlds;
 
+import uk.dangrew.dinosaurs.game.behaviour.consumption.ConsumptionBehaviour;
 import uk.dangrew.dinosaurs.game.building.DinosaurBuilder;
 import uk.dangrew.dinosaurs.game.building.RockBuilder;
 import uk.dangrew.dinosaurs.game.building.TreeBuilder;
@@ -43,6 +44,7 @@ public class World1Assets {
       
       this.player = assetManager.getDinosaurStore().createConcept("Steggy");
       player.getWorldLocation().set(new WorldLocation(0, 0, world));
+      player.getBehaviour().set(new ConsumptionBehaviour(player));
       
       new DinosaurBuilder(assetManager.getDinosaurStore(), world, assetManager.getCollisionDetection())
             .buildHerbivoreRoamer("Herby", new WorldLocation(5, 2, world))

@@ -1,3 +1,4 @@
+
 package uk.dangrew.dinosaurs.game.model.dinosaur;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -32,10 +33,12 @@ public class InteractionZoneTest {
    public void shouldProvideZoneOverRange() {
       Collection<WorldLocation> interactionZone = systemUnderTest.calculateInteractionZone(world);
       assertThat(interactionZone.size(), equalTo(25));
-      for(int i = 0; i < 5; i++) {
-         for(int j = 0; j < 5; j++) {
+      for (int i = 0; i < 5; i++) {
+         for (int j = 0; j < 5; j++) {
             assertThat(interactionZone.contains(new TestWorldLocation(i + 1, j + 2)), equalTo(true));
+            assertThat(systemUnderTest.contains(new TestWorldLocation(i + 1, j + 2)), equalTo(true));
          }
       }
    }
+   
 }

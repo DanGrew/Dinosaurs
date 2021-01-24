@@ -1,4 +1,4 @@
-package uk.dangrew.dinosaurs.game.ai;
+package uk.dangrew.dinosaurs.game.behaviour;
 
 /**
  * Interface for various behaviour a dinosaur can exhibit.

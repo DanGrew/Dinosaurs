@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import uk.dangrew.dinosaurs.game.ai.DinosaurBehaviour;
-import uk.dangrew.dinosaurs.game.ai.ManuallyControlledBehaviour;
+import uk.dangrew.dinosaurs.game.actions.mechanism.ActionGenerator;
+import uk.dangrew.dinosaurs.game.actions.mechanism.NoActions;
+import uk.dangrew.dinosaurs.game.behaviour.DinosaurBehaviour;
+import uk.dangrew.dinosaurs.game.behaviour.roaming.ManuallyControlledBehaviour;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetector;
 import uk.dangrew.dinosaurs.game.collision.NoCollisions;
 import uk.dangrew.dinosaurs.game.storage.Asset;
@@ -19,9 +21,12 @@ public class Dinosaur implements Asset {
    
    private final Properties properties;
    private final CollisionDetector collisionDetector;
+   private final ActionGenerator actionGenerator;
    private final InteractionZone interactionZone;
 
-   private final int height;
+   private final ObjectProperty<Integer> height;
+   private final ObjectProperty<Integer> hunger;
+   private final ObjectProperty<Integer> thirst;
    private final ObjectProperty<WorldLocation> worldLocation;
    private final ObjectProperty<DinosaurBehaviour> behaviour;
    
@@ -36,7 +41,10 @@ public class Dinosaur implements Asset {
    Dinosaur(Properties properties) {
       this.properties = properties;
       this.collisionDetector = new NoCollisions();
-      this.height = 1;
+      this.actionGenerator = new NoActions();
+      this.height = new SimpleObjectProperty<>(1);
+      this.hunger = new SimpleObjectProperty<>(0);
+      this.thirst = new SimpleObjectProperty<>(0);
       this.interactionZone = new InteractionZone(this, 1);
       this.worldLocation = new SimpleObjectProperty<>();
       this.behaviour = new SimpleObjectProperty<>(new ManuallyControlledBehaviour());
@@ -55,6 +63,11 @@ public class Dinosaur implements Asset {
    @Override
    public CollisionDetector getCollisionDetector() {
       return collisionDetector;
+   }
+
+   @Override
+   public ActionGenerator getActionGenerator() {
+      return actionGenerator;
    }
 
    public ObjectProperty<DinosaurBehaviour> getBehaviour() {
@@ -81,8 +94,16 @@ public class Dinosaur implements Asset {
       return worldLocation;
    }
 
-   public int getHeight() {
+   public ObjectProperty<Integer> height() {
       return height;
+   }
+
+   public ObjectProperty<Integer> hunger() {
+      return hunger;
+   }
+
+   public ObjectProperty<Integer> thirst() {
+      return thirst;
    }
 
    public void moveUp(World world) {
