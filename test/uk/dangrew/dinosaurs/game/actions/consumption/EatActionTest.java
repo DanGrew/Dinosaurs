@@ -3,7 +3,7 @@ package uk.dangrew.dinosaurs.game.actions.consumption;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static uk.dangrew.dinosaurs.game.actions.consumption.EatAction.*;
+import static uk.dangrew.dinosaurs.game.actions.consumption.EatAction.MAXIMUM_FEED;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,20 +50,20 @@ public class EatActionTest {
    public void shouldDescribeWhenAvailable() {
       tree.foodAvailable().set(100);
       dinosaur.hunger().set(100);
-      assertThat(systemUnderTest.describe(), equalTo(tree.getWorldLocation().wrapedCoordinates() + EAT_JUICY_LEAVES_AVAILABLE));
+      assertThat(systemUnderTest.describe(), equalTo("{10, 11}:\nEat! Juicy leaves available!"));
    }
    
    @Test
    public void shouldDescribeWhenDinosaurNotHungry() {
       tree.foodAvailable().set(100);
-      assertThat(systemUnderTest.describe(), equalTo(tree.getWorldLocation().wrapedCoordinates() + NOT_HUNGRY));
+      assertThat(systemUnderTest.describe(), equalTo("{10, 11}:\nNo appetite..."));
    }
    
    @Test
    public void shouldDescribeWhenTreeEmpty() {
       tree.foodAvailable().set(0);
       dinosaur.hunger().set(100);
-      assertThat(systemUnderTest.describe(), equalTo(tree.getWorldLocation().wrapedCoordinates() + NOTHING_TO_EAT_TREE_S_LOOKING_A_BIT_BARE));
+      assertThat(systemUnderTest.describe(), equalTo("{10, 11}:\nNothing to eat... Tree's looking a bit bare..."));
    }
    
    @Test

@@ -40,7 +40,7 @@ public class EatActionGeneratorTest {
    public void shouldProvideEatActionWhenInInteractionZone() {
       tree.setWorldLocation(new TestWorldLocation(3, 4));
       
-      Collection<GameAction> result = systemUnderTest.generateActions(dinosaur);
+      Collection<GameAction> result = systemUnderTest.generateActions(dinosaur, world);
       assertThat(result, hasSize(1));
       assertThat(result.iterator().next(), instanceOf(EatAction.class));
    }
@@ -49,7 +49,7 @@ public class EatActionGeneratorTest {
    public void shouldNotProvideEatActionWhenNotInInteractioZone() {
       tree.setWorldLocation(new TestWorldLocation(8, 8));
       
-      Collection<GameAction> result = systemUnderTest.generateActions(dinosaur);
+      Collection<GameAction> result = systemUnderTest.generateActions(dinosaur, world);
       assertThat(result, empty());
    }
 }

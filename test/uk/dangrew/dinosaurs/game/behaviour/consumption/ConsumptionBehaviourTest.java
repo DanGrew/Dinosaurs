@@ -42,4 +42,18 @@ public class ConsumptionBehaviourTest {
       assertThat(dinosaur.hunger().get(), equalTo(30 + 10));
       assertThat(dinosaur.thirst().get(), equalTo(40 + 15));
    }
+   
+   @Test
+   public void shouldNotIncreaseHungerAndThirstBeyondMaximum() {
+      when(random.nextInt(anyInt()))
+            .thenReturn(20)
+            .thenReturn(25);
+      
+      dinosaur.hunger().set(190);
+      dinosaur.thirst().set(190);
+      
+      systemUnderTest.behave();
+      assertThat(dinosaur.hunger().get(), equalTo(ConsumptionWarnings.maximum().limit()));
+      assertThat(dinosaur.thirst().get(), equalTo(ConsumptionWarnings.maximum().limit()));
+   }
 }

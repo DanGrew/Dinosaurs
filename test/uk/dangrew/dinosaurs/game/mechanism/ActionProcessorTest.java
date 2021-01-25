@@ -97,7 +97,7 @@ public class ActionProcessorTest {
       
       @BeforeEach
       public void initialiseTestData() {
-         when(actionGenerator.generateActions(player)).thenReturn(asList(gameAction1, gameAction2));
+         when(actionGenerator.generateActions(player, world)).thenReturn(asList(gameAction1, gameAction2));
       }
       
       @Test

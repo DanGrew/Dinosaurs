@@ -38,7 +38,7 @@ public class InteractionZone {
       
       return unmodifiableCollection(interactionZone);
    }
-   
+
    public int getRange() {
       return range;
    }

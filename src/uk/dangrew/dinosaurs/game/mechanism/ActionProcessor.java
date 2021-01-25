@@ -16,6 +16,7 @@ import uk.dangrew.dinosaurs.game.collision.Collision;
 import uk.dangrew.dinosaurs.game.collision.CollisionDetection;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.storage.Asset;
+import uk.dangrew.dinosaurs.game.world.World;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.GameState;
 import uk.dangrew.kode.concept.ConceptStore;
@@ -41,6 +42,8 @@ public class ActionProcessor {
    
    public Collection<GameAction> calculateAvailableActions() {
       Dinosaur player = gameState.expectPlayer();
+      World world = gameState.expectWorld();
+
       Set<GameAction> possibleActions = new LinkedHashSet<>();
 
       possibleActions.add(new RestAction(player.expectLocation()));
@@ -53,7 +56,7 @@ public class ActionProcessor {
             .map(ConceptStore::objectList)
             .flatMap(List::stream)
             .map(Asset::getActionGenerator)
-            .map(generator -> generator.generateActions(player))
+            .map(generator -> generator.generateActions(player, world))
             .flatMap(Collection::stream)
             .forEach(possibleActions::add);
       

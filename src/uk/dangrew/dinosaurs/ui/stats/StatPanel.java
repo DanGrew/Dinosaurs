@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import uk.dangrew.dinosaurs.game.behaviour.consumption.ConsumptionWarnings;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.world.WorldLocation;
 import uk.dangrew.dinosaurs.ui.configuration.GameState;
@@ -16,6 +17,7 @@ import uk.dangrew.dinosaurs.ui.view.CameraController;
 import uk.dangrew.kode.javafx.custom.BoundIntegerAsTextProperty;
 import uk.dangrew.kode.javafx.custom.BoundTextProperty;
 import uk.dangrew.kode.javafx.custom.PropertiesPane;
+import uk.dangrew.kode.javafx.style.JavaFxStyle;
 import uk.dangrew.kode.javafx.style.PropertyRowBuilder;
 
 /**
@@ -26,7 +28,15 @@ public class StatPanel {
    private final BorderPane content;
    
    private final ChangeListener<WorldLocation> locationUpdater;
+   private final ChangeListener<Integer> hungerUpdater;
+   private final ChangeListener<Integer> thirstUpdater;
+   
    private final ObjectProperty<String> locationProperty;
+   private final ObjectProperty<String> hungerProperty;
+   private final ObjectProperty<String> thirstProperty;
+   
+   private BoundTextProperty hungerRegion;
+   private BoundTextProperty thirstRegion;
    
    public StatPanel(GameState gameState, CameraController cameraController) {
       this(new PanningControls(cameraController), gameState);
@@ -34,7 +44,11 @@ public class StatPanel {
    
    StatPanel(PanningControls panningControls, GameState gameState) {
       this.locationUpdater = this::locationUpdater;
+      this.hungerUpdater = this::hungerUpdater;
+      this.thirstUpdater = this::thirstUpdater;
       this.locationProperty = new SimpleObjectProperty<>("Unknown");
+      this.hungerProperty = new SimpleObjectProperty<>("Unknown");
+      this.thirstProperty = new SimpleObjectProperty<>("Unknown");
       this.content = new BorderPane();
       
       content.setTop(panningControls);
@@ -42,18 +56,21 @@ public class StatPanel {
       gameState.currentPlayer().addListener((s, o, n) -> resetStats(o, n));
    }
    
-   public Node getGraphicalComponent(){
+   public Node getGraphicalComponent() {
       return content;
    }
    
    private void resetStats(Dinosaur oldPlayer, Dinosaur player) {
       if (oldPlayer != null) {
          oldPlayer.getWorldLocation().removeListener(locationUpdater);
+         oldPlayer.hunger().removeListener(hungerUpdater);
+         oldPlayer.thirst().removeListener(thirstUpdater);
       }
       
       player.getWorldLocation().addListener(locationUpdater);
-      locationProperty.set(player.expectLocation().wrapedCoordinates());
-      
+      player.hunger().addListener(hungerUpdater);
+      player.thirst().addListener(thirstUpdater);
+
       content.setCenter(new PropertiesPane("Stats",
             new PropertyRowBuilder()
                   .withLabelName("Name:")
@@ -66,10 +83,14 @@ public class StatPanel {
                   .withBinding(new BoundIntegerAsTextProperty(player.height(), false)),
             new PropertyRowBuilder()
                   .withLabelName("Hunger:")
-                  .withBinding(new BoundIntegerAsTextProperty(player.hunger(), false)),
+                  .withBinding(hungerRegion = new BoundTextProperty(hungerProperty, false)),
             new PropertyRowBuilder()
                   .withLabelName("Thirst:")
-                  .withBinding(new BoundIntegerAsTextProperty(player.thirst(), false))));
+                  .withBinding(thirstRegion = new BoundTextProperty(thirstProperty, false))));
+      
+      locationUpdater(null, null, player.expectLocation());
+      hungerUpdater(null, null, player.hunger().get());
+      thirstUpdater(null, null, player.thirst().get());
    }
    
    private void locationUpdater(ObservableValue<? extends WorldLocation> source, WorldLocation old, WorldLocation updated) {
@@ -79,7 +100,35 @@ public class StatPanel {
       locationProperty.set(updated.wrapedCoordinates());
    }
    
+   private void hungerUpdater(ObservableValue<? extends Integer> source, Integer old, Integer updated) {
+      if (updated == null) {
+         updated = 0;
+      }
+      
+      ConsumptionWarnings warning = ConsumptionWarnings.of(updated);
+      hungerProperty.set(warning.hungerName());
+      hungerRegion.region().setBackground(new JavaFxStyle().backgroundFor(warning.colour()));
+   }
+   
+   private void thirstUpdater(ObservableValue<? extends Integer> source, Integer old, Integer updated) {
+      if (updated == null) {
+         updated = 0;
+      }
+      
+      ConsumptionWarnings warning = ConsumptionWarnings.of(updated);
+      thirstProperty.set(warning.thirstName());
+      thirstRegion.region().setBackground(new JavaFxStyle().backgroundFor(warning.colour()));
+   }
+   
    ReadOnlyObjectProperty<String> locationProperty() {
       return locationProperty;
+   }
+   
+   ReadOnlyObjectProperty<String> hungerProperty() {
+      return hungerProperty;
+   }
+   
+   ReadOnlyObjectProperty<String> thirstProperty() {
+      return thirstProperty;
    }
 }

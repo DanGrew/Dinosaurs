@@ -10,6 +10,7 @@ import uk.dangrew.dinosaurs.game.actions.mechanism.ActionGenerator;
 import uk.dangrew.dinosaurs.game.actions.mechanism.GameAction;
 import uk.dangrew.dinosaurs.game.model.dinosaur.Dinosaur;
 import uk.dangrew.dinosaurs.game.model.greenery.Tree;
+import uk.dangrew.dinosaurs.game.world.World;
 
 /**
  * {@link ActionGenerator} for eating from trees in a dinosaurs interaction zone.
@@ -23,7 +24,7 @@ public class EatActionGenerator implements ActionGenerator {
    }
    
    @Override
-   public Collection<GameAction> generateActions(Dinosaur dinosaur) {
+   public Collection<GameAction> generateActions(Dinosaur dinosaur, World world) {
       if (dinosaur.getInteractionZone().contains(tree.getWorldLocation())) {
          return singleton(new EatAction(tree, dinosaur));
       }

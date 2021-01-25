@@ -30,7 +30,7 @@ public class MoveAction implements GameAction {
    
    @Override
    public String describe() {
-      return String.format("%s: Move %s.", locationToMoveTo.wrapedCoordinates(), movement.displayName());
+      return describe(locationToMoveTo.wrapedCoordinates(), " Move " + movement.displayName());
    }
    
    public Movement movement() {

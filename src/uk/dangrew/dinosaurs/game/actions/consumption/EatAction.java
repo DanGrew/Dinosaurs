@@ -10,9 +10,9 @@ import uk.dangrew.dinosaurs.game.model.greenery.Tree;
  */
 public class EatAction implements GameAction {
 
-   static final String EAT_JUICY_LEAVES_AVAILABLE = ": Eat! Juicy leaves available!";
-   static final String NOTHING_TO_EAT_TREE_S_LOOKING_A_BIT_BARE = ": Nothing to eat... Tree's looking a bit bare...";
-   static final String NOT_HUNGRY = ": Not hungry...";
+   static final String EAT_JUICY_LEAVES_AVAILABLE = "Eat! Juicy leaves available!";
+   static final String NOTHING_TO_EAT_TREE_S_LOOKING_A_BIT_BARE = "Nothing to eat... Tree's looking a bit bare...";
+   static final String NOT_HUNGRY = "No appetite...";
    
    static final int MAXIMUM_FEED = 30;
 
@@ -31,14 +31,15 @@ public class EatAction implements GameAction {
    
    @Override
    public String describe() {
+      String location = tree.getWorldLocation().wrapedCoordinates();
       if (dinosaur.hunger().get() > 0) {
          if (tree.foodAvailable().get() > 0) {
-            return tree.getWorldLocation().wrapedCoordinates() + EAT_JUICY_LEAVES_AVAILABLE;
+            return describe(location, EAT_JUICY_LEAVES_AVAILABLE);
          } else {
-            return tree.getWorldLocation().wrapedCoordinates() + NOTHING_TO_EAT_TREE_S_LOOKING_A_BIT_BARE;
+            return describe(location, NOTHING_TO_EAT_TREE_S_LOOKING_A_BIT_BARE);
          }
       } else {
-         return tree.getWorldLocation().wrapedCoordinates() + NOT_HUNGRY;
+         return describe(location, NOT_HUNGRY);
       }
    }
    

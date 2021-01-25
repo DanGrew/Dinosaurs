@@ -27,9 +27,13 @@ public class ConsumptionBehaviour implements DinosaurBehaviour {
    @Override
    public void behave() {
       int hungerIncrease = consumptionRandomizer.nextInt(MAXIMUM_INCREASE);
-      dinosaur.hunger().set(dinosaur.hunger().get() + hungerIncrease);
+      int updatedHunger = dinosaur.hunger().get() + hungerIncrease;
+      updatedHunger = Math.min(updatedHunger, ConsumptionWarnings.maximum().limit());
+      dinosaur.hunger().set(updatedHunger);
       
       int thirstIncrease = consumptionRandomizer.nextInt(MAXIMUM_INCREASE);
-      dinosaur.thirst().set(dinosaur.thirst().get() + thirstIncrease);
+      int updatedThirst = dinosaur.thirst().get() + thirstIncrease;
+      updatedThirst = Math.min(updatedThirst, ConsumptionWarnings.maximum().limit());
+      dinosaur.thirst().set(updatedThirst);
    }
 }

@@ -9,6 +9,10 @@ public interface GameAction {
    
    public String describe();
    
+   public default String describe(String location, String description){
+      return String.format("%s:\n%s", location, description);
+   }
+   
    public void performAction();
    
 }

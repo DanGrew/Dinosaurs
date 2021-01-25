@@ -1,7 +1,9 @@
+
 package uk.dangrew.dinosaurs.ui.stats;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static uk.dangrew.dinosaurs.game.behaviour.consumption.ConsumptionWarnings.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,7 @@ public class StatPanelTest {
    public void initialiseSystemUnderTest() {
       JavaFxThreading.startup();
       dinosaur = new Dinosaur("Dino");
+      dinosaur.getWorldLocation().set(new TestWorldLocation(3, 4));
       gameState = new GameState();
       systemUnderTest = new StatPanel(panningControls, gameState);
    }
@@ -35,8 +38,47 @@ public class StatPanelTest {
    @Test
    public void shouldConvertLocationToText() {
       assertThat(systemUnderTest.locationProperty().get(), equalTo("Unknown"));
-      dinosaur.getWorldLocation().set(new TestWorldLocation(3, 4));
       gameState.currentPlayer().set(dinosaur);
       assertThat(systemUnderTest.locationProperty().get(), equalTo("{3, 4}"));
+   }
+   
+   @Test
+   public void shouldConvertHungerToText() {
+      assertThat(systemUnderTest.hungerProperty().get(), equalTo("Unknown"));
+      dinosaur.hunger().set(10);
+      gameState.currentPlayer().set(dinosaur);
+      assertThat(systemUnderTest.hungerProperty().get(), equalTo(NO_WARNING.hungerName()));
+      
+      dinosaur.hunger().set(60);
+      assertThat(systemUnderTest.hungerProperty().get(), equalTo(MILD.hungerName()));
+      
+      dinosaur.hunger().set(110);
+      assertThat(systemUnderTest.hungerProperty().get(), equalTo(RUMBLY.hungerName()));
+      
+      dinosaur.hunger().set(160);
+      assertThat(systemUnderTest.hungerProperty().get(), equalTo(HANGRY.hungerName()));
+      
+      dinosaur.hunger().set(210);
+      assertThat(systemUnderTest.hungerProperty().get(), equalTo(AGGRESSIVE.hungerName()));
+   }
+   
+   @Test
+   public void shouldConvertThirstToText() {
+      assertThat(systemUnderTest.thirstProperty().get(), equalTo("Unknown"));
+      dinosaur.thirst().set(10);
+      gameState.currentPlayer().set(dinosaur);
+      assertThat(systemUnderTest.thirstProperty().get(), equalTo(NO_WARNING.thirstName()));
+      
+      dinosaur.thirst().set(60);
+      assertThat(systemUnderTest.thirstProperty().get(), equalTo(MILD.thirstName()));
+      
+      dinosaur.thirst().set(110);
+      assertThat(systemUnderTest.thirstProperty().get(), equalTo(RUMBLY.thirstName()));
+      
+      dinosaur.thirst().set(160);
+      assertThat(systemUnderTest.thirstProperty().get(), equalTo(HANGRY.thirstName()));
+      
+      dinosaur.thirst().set(210);
+      assertThat(systemUnderTest.thirstProperty().get(), equalTo(AGGRESSIVE.thirstName()));
    }
 }
